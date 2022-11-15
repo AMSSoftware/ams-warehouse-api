@@ -14,5 +14,5 @@ jobs:
       - name: GitHub Action
         uses: readmeio/rdme@8.0.4
         with:
-          rdme: openapi ./Authorization_API_stoplight_studio.yaml --key=${{secrets.README_AUTH_KEY}} --id=611ef791381a5ac89dcc27e5
+          rdme: openapi './Authorization_API_stoplight_studio.yaml' --key=${{secrets.README_AUTH_KEY}} --id=611ef791381a5ac89dcc27e5
           
