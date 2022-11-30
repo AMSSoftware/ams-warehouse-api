@@ -1,0 +1,3606 @@
+openapi: 3.0.0
+info:
+  title: V1 AMS Warehouse Ship-To Customers API
+  description: |
+    RESTful API Access to the AMS Warehouse Customers business object. This business object represents customers defined in the AMS Warehouse product.
+    <br/>
+    <h1>Version Control Scheme</h1>
+    <p>Versions will be relatively static, when breaking/logic changes occur a new version will be created.</p>
+    <hr/>
+    <h1>Revision Log</h1>
+    <ul>
+    <li>2022-11-23 - KAS - Brand new, cloned from AMS Warehouse Products API</li>
+    </ul>
+  contact:
+    name: Helpdesk API Support
+    email: apisupport@amssoftware.com
+    url: 'http://www.amssoftware.com'
+  license:
+    name: License Required
+    url: 'http://www.amssoftware.com'
+  version: '2022-11-23'
+servers:
+  - description: Warehouse Development Server
+    url: 'https://thor2012-whse.amscloudconnect.amssoftware.com/api'
+security:
+  - AMSBearerAuth: []
+  - AMSImpersonationAuth: []
+tags:
+  - name: WarehouseShipCustomersGET
+    description: Gets to the Warehouse customers API endpoint.
+paths:
+  /warehouse/v1/ship_customers:
+    get:
+      operationId: getV1WarehouseShipCustomersQueryResults
+      tags:
+        - WarehouseShipCustomersGET
+      summary: GET customer query results.
+      description: Perform a search for customers defined in the AMS warehouse database via various query parameters.
+      parameters:
+        - name: pagination
+          in: query
+          description: 'Query parameter that will allow for retrieving "pages" of results from the ship_customers resource. The format of the value passed must be the following, {number1},{number2}. The first numeric value indicates the number of results per page and the second numeric value indicates the requested page of results.'
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok - The query of the warehouse ship_customers resource was successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ams_api_response:
+                    type: object
+                    properties:
+                      error_state:
+                        type: boolean
+                        example: false
+                      endpoint_response:
+                        type: object
+                        properties:
+                          query_results:
+                            type: object
+                            properties:
+                              ship_customers_found:
+                                type: integer
+                                example: 1
+                              ship_customers:
+                                type: array
+                                items:
+                                  title: V1GETOEShipToCustomerObject
+                                  type: object
+                                  properties:
+                                    activity_status:
+                                      title: CustomerActivityStatusEnum
+                                      x-tags:
+                                        - Enumeration
+                                      type: string
+                                      maxLength: 22
+                                      enum:
+                                        - Active Customer
+                                        - Inactive Customer
+                                        - High Activity Customer
+                                      example: Active Customer
+                                    address_1:
+                                      type: string
+                                      maxLength: 30
+                                      example: 4415 Sonoma Highway
+                                    address_2:
+                                      type: string
+                                      maxLength: 30
+                                      example: ' '
+                                    alc_allocation_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: NA
+                                    arl_ar_ledger_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: NA
+                                    ars_statement_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: NA
+                                    art_ar_terms_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: NA
+                                    bill-to-customer_id:
+                                      type: integer
+                                      minimum: 0
+                                      maximum: 9999
+                                      example: 0
+                                    broker_number:
+                                      type: string
+                                      maxLength: 4
+                                      example: ' '
+                                    cfc_customer_financial_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: NA
+                                    city:
+                                      type: string
+                                      maxLength: 24
+                                      example: Santa Rosa
+                                    corporate_customer_id:
+                                      type: integer
+                                      minimum: 0
+                                      maximum: 9999
+                                      example: 125
+                                    corporate_customer_report_description:
+                                      type: string
+                                      maxLength: 30
+                                      example: Some great customer
+                                    ctr_country_code:
+                                      type: string
+                                      maxLength: 4
+                                      example: NA
+                                    cty_customer_type_code:
+                                      type: string
+                                      maxLength: 4
+                                      example: RETL
+                                    customer_additional_information:
+                                      type: string
+                                      maxLength: 30
+                                      example: Joe's a great guy!
+                                    customer_id:
+                                      type: integer
+                                      minimum: 1
+                                      maximum: 9999
+                                      example: 125
+                                    customer_report_description:
+                                      type: string
+                                      maxLength: 30
+                                      example: Some great customer
+                                    dac_da_class_code:
+                                      type: string
+                                      maxLength: 4
+                                      example: ' '
+                                    delivery_instructions_1:
+                                      type: string
+                                      maxLength: 30
+                                      example: Delivery to the back door.
+                                    delivery_instructions_2:
+                                      type: string
+                                      maxLength: 30
+                                      example: Sike! Deliver it to the front.
+                                    delivery_instructions_3:
+                                      type: string
+                                      maxLength: 30
+                                      example: Haha! Thank you!
+                                    delivery_status:
+                                      title: DeliveryStatusEnum
+                                      x-tags:
+                                        - Enumeration
+                                      type: string
+                                      maxLength: 24
+                                      enum:
+                                        - Check On Delivery
+                                        - Check Before Delivery
+                                        - On Hold
+                                      example: Check On Delivery
+                                    deplete_to_customer_id:
+                                      type: integer
+                                      minimum: 0
+                                      maximum: 9999
+                                      example: 0
+                                    div_division_code:
+                                      type: string
+                                      maxLength: 4
+                                      example: NA
+                                    dlz_delivery_zone_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: '10'
+                                    fgh_freight_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: NA
+                                    fips_county_code:
+                                      type: string
+                                      maxLength: 3
+                                      example: 097
+                                    ftt_invoice_type_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: '01'
+                                    gga_geographic_area:
+                                      type: string
+                                      maxLength: 4
+                                      example: NA
+                                    group_to_customer_id:
+                                      type: integer
+                                      minimum: 0
+                                      maximum: 9999
+                                      example: 125
+                                    group_to_customer_report_description:
+                                      type: string
+                                      maxLength: 30
+                                      example: Some great customer
+                                    last_order_date:
+                                      type: string
+                                      maxLength: 10
+                                      example: 09/21/2022
+                                    last_pay_date:
+                                      type: string
+                                      maxLength: 10
+                                      example: 10/31/2022
+                                    last_sale_date:
+                                      type: string
+                                      maxLength: 10
+                                      example: 09/20/2022
+                                    loc_default_ship_location_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: WS
+                                    loc_default_to_location_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: '01'
+                                    main_contact_name:
+                                      type: string
+                                      maxLength: 30
+                                      example: Joe Schmo
+                                    mkt_market_code:
+                                      type: string
+                                      maxLength: 4
+                                      example: NA
+                                    mlc_mail_list_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: ND
+                                    name:
+                                      type: string
+                                      maxLength: 30
+                                      example: Some wholesale customer
+                                    outstanding_order_count:
+                                      type: integer
+                                      minimum: 0
+                                      maximum: 9999
+                                      example: 5
+                                    phone_number:
+                                      type: string
+                                      maxLength: 12
+                                      example: 707-539-7990
+                                    pickslip_pricing_flag:
+                                      type: boolean
+                                      example: false
+                                    prs_pricing_class_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: NA
+                                    resale_number:
+                                      type: string
+                                      maxLength: 18
+                                      example: ' '
+                                    revised_date:
+                                      type: string
+                                      maxLength: 10
+                                      example: 12/20/2022
+                                    rgn_region_code:
+                                      type: string
+                                      maxLength: 4
+                                      example: NA
+                                    sales_tax_status:
+                                      title: SalesTaxStatusEnum
+                                      x-tags:
+                                        - Enumeration
+                                      type: string
+                                      maxLength: 18
+                                      enum:
+                                        - Sales Taxable
+                                        - Sales Not Taxable
+                                      example: Sales Taxable
+                                    salesman_number:
+                                      type: string
+                                      maxLength: 4
+                                      example: ' '
+                                    sat_sales_type_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: WS
+                                    scc_state_customer_category_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: NA
+                                    sct_sales_category_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: NA
+                                    setup_date:
+                                      type: string
+                                      maxLength: 10
+                                      example: 01/01/1991
+                                    ship_via:
+                                      type: string
+                                      maxLength: 20
+                                      example: ' '
+                                    sph_special_handling_code:
+                                      type: string
+                                      maxLength: 4
+                                      example: NA
+                                    state:
+                                      type: string
+                                      maxLength: 2
+                                      example: CA
+                                    stx_sales_tax_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: CA
+                                    tax_exempt_reason:
+                                      title: TaxExemptReasonEnum
+                                      x-tags:
+                                        - Enumeration
+                                      type: string
+                                      maxLength: 14
+                                      enum:
+                                        - In Bond
+                                        - Export
+                                        - Unknown
+                                        - Export and Pay
+                                        - Not Exempt
+                                      example: Not Exempt
+                                    zip_code:
+                                      type: string
+                                      maxLength: 10
+                                      example: 95409
+                                    orders:
+                                      type: array
+                                      items:
+                                        title: V1GETOrderObject
+                                        type: object
+                                        properties:
+                                          consumer_order_flag:
+                                            type: boolean
+                                            example: false
+                                          creation_date:
+                                            type: string
+                                            maxLength: 10
+                                            example: 01/01/2020
+                                          creation_time:
+                                            type: string
+                                            maxLength: 8
+                                            example: '11:35:48'
+                                          creation_user_name:
+                                            type: string
+                                            maxLength: 8
+                                            example: JOE
+                                          description1:
+                                            type: string
+                                            maxLength: 50
+                                            example: ' '
+                                          description2:
+                                            type: string
+                                            maxLength: 50
+                                            example: ' '
+                                          due_date:
+                                            type: string
+                                            maxLength: 10
+                                            example: 01/31/2020
+                                          expected_ship_date:
+                                            type: string
+                                            maxLength: 10
+                                            example: 02/05/2020
+                                          invoice_number:
+                                            type: string
+                                            maxLength: 10
+                                            example: '456789'
+                                          invoice_print_date:
+                                            type: string
+                                            maxLength: 10
+                                            example: 01/15/2020
+                                          last_mod_date:
+                                            type: string
+                                            maxLength: 10
+                                            example: 01/11/2020
+                                          last_mod_time:
+                                            type: string
+                                            maxLength: 8
+                                            example: '12:00:00'
+                                          last_mod_user:
+                                            type: string
+                                            maxLength: 8
+                                            example: JOE
+                                          month_and_year_received:
+                                            type: string
+                                            maxLength: 7
+                                            example: 01/2020
+                                          order_busy_status:
+                                            type: string
+                                            enum:
+                                              - Not Busy
+                                              - Busy for Order Entry
+                                              - Busy for Order Shipping
+                                              - Busy for Invoice Update
+                                            example: Not Busy
+                                          order_confirmation_status:
+                                            type: string
+                                            enum:
+                                              - Needs Confirmed
+                                              - No Confirmation
+                                              - Confirmation Sent
+                                              - Confirmation Cancelled
+                                            example: Confirmation Sent
+                                          order_date:
+                                            type: string
+                                            maxLength: 10
+                                            example: 01/01/2020
+                                          order_additional_freight_amount:
+                                            type: number
+                                            minimum: -9999999.99
+                                            maximum: 9999999.99
+                                            example: 150
+                                          order_consolidation_amount:
+                                            type: number
+                                            minimum: -9999999.99
+                                            maximum: 9999999.99
+                                            example: 0
+                                          order_excise_tax_amount:
+                                            type: number
+                                            minimum: -9999999.99
+                                            maximum: 9999999.99
+                                            example: 150
+                                          order_freight_amount:
+                                            type: number
+                                            minimum: -9999999.99
+                                            maximum: 9999999.99
+                                            example: 150.25
+                                          order_id:
+                                            type: string
+                                            minLength: 1
+                                            maxLength: 11
+                                            example: 104-0
+                                          order_status:
+                                            title: OrdStatusEnum
+                                            type: string
+                                            enum:
+                                              - 05-On_Hold
+                                              - 10-Received
+                                              - 15-Pickslip_Reprint_Pending
+                                              - 20-Pickslip_Printed
+                                              - 25-Bill_of_Lading_Reprint_Pending
+                                              - 30-Bill_of_Lading_Printed
+                                              - 35-Bill_of_Lading_Printed
+                                              - 50-Shipped
+                                              - 60-Invoiced
+                                              - 95-Cancelled
+                                            example: 10-Received
+                                          order_type:
+                                            type: string
+                                            enum:
+                                              - Normal
+                                              - Correction
+                                              - Return
+                                            example: Normal
+                                          otp_order_type_code:
+                                            type: string
+                                            maxLength: 10
+                                            example: Club
+                                          pickslip_date:
+                                            type: string
+                                            maxLength: 10
+                                            example: 01/13/2020
+                                          pickslip_print_count:
+                                            type: integer
+                                            minimum: 0
+                                            maximum: 9999
+                                          pickslip_time:
+                                            type: string
+                                            maxLength: 8
+                                            example: '13:44:50'
+                                          purchase_order_number:
+                                            type: string
+                                            maxLength: 10
+                                            example: '123456'
+                                          refer_to_invoice_number:
+                                            type: integer
+                                            minimum: 0
+                                            maximum: 9999999999
+                                          report_to_state_flag:
+                                            type: boolean
+                                            example: true
+                                          shipment_advisement_status:
+                                            type: string
+                                            enum:
+                                              - Shipment Advisement Needed
+                                              - No Shipment Advisement
+                                              - Shipment Advisement Sent
+                                            example: No Shipment Advisement
+                                          ship_date:
+                                            type: string
+                                            maxLength: 10
+                                            example: 01/15/2020
+                                          ship_user_name:
+                                            type: string
+                                            maxLength: 8
+                                            example: JOE
+                                          ship_via_text:
+                                            type: string
+                                            maxLength: 30
+                                            example: Via Ray's Trucking
+                                          ship_with_reference_number:
+                                            type: string
+                                            maxLength: 20
+                                            example: A56498
+                                          status_date:
+                                            type: string
+                                            maxLength: 10
+                                            example: 01/12/2020
+                                          total_weight_in_pounds:
+                                            type: number
+                                            minimum: 0
+                                            maximum: 9999999.99
+                                            example: 3562.1
+                                          whole_cases_ordered:
+                                            type: number
+                                            minimum: -9999999.99
+                                            maximum: 9999999.99
+                                            example: 112
+                                          whole_cases_shipped:
+                                            type: number
+                                            minimum: -9999999.99
+                                            maximum: 9999999.99
+                                            example: 112
+                                          whs_warehouse_code:
+                                            type: string
+                                            maxLength: 2
+                                            example: 8W
+                                          winery_reference_number:
+                                            type: string
+                                            maxLength: 20
+                                            example: A56498
+                                          win_winery_code:
+                                            type: string
+                                            maxLength: 4
+                                            example: AV
+                                    contacts:
+                                      type: array
+                                      items:
+                                        title: V1GETContactObject
+                                        type: object
+                                        properties:
+                                          id:
+                                            type: integer
+                                            minimum: 1
+                                            maximum: 4
+                                            example: 1
+                                          contact_type:
+                                            title: ContactTypeEnum
+                                            x-tags:
+                                              - Enumeration
+                                            type: string
+                                            maxLength: 24
+                                            enum:
+                                              - Accounts Receivable
+                                              - Invoice
+                                              - Wholesale Order
+                                              - Direct-To-Consumer Order
+                                          contact_name:
+                                            type: string
+                                            maxLength: 30
+                                            example: Karen at the co-op
+                                          address_1:
+                                            type: string
+                                            maxLength: 30
+                                            example: 4415 Sonoma Highway
+                                          address_2:
+                                            type: string
+                                            maxLength: 30
+                                            example: ' '
+                                          city:
+                                            type: string
+                                            maxLength: 24
+                                            example: Santa Rosa
+                                          state:
+                                            type: string
+                                            maxLength: 2
+                                            example: CA
+                                          zipcode:
+                                            type: string
+                                            maxLength: 10
+                                            example: '95409'
+                                          phone:
+                                            type: string
+                                            maxLength: 16
+                                            example: 707-539-7990
+                                          email:
+                                            type: string
+                                            maxLength: 256
+                                            example: orders@amssoftware.com;customerservice@amssoftware.com
+                                          ocd_distribution_list_code:
+                                            type: string
+                                            maxLength: 2
+                                            example: WB
+        '400':
+          description: The query parameters used in the query of the products endpoint were invalid.
+          content:
+            application/json:
+              schema:
+                title: Bad Request - Invalid Query Parameters Response
+                x-tags:
+                  - FailureResponse
+                type: object
+                properties:
+                  ams_api_response:
+                    type: object
+                    properties:
+                      error_state:
+                        type: boolean
+                        example: true
+                      error_msg:
+                        title: HandlerHttpErrorMessage
+                        x-tags:
+                          - Message
+                        type: string
+                        example: The API handler indicated an error condition via the HTTP return code.
+                      endpoint_response:
+                        type: object
+                        properties:
+                          potential_query_parameters:
+                            title: PotentialQueryParms
+                            type: array
+                            minItems: 1
+                            items:
+                              anyOf:
+                                - title: QueryParm1Object
+                                  type: object
+                                  properties:
+                                    parameter_name:
+                                      type: string
+                                      example: FIXED_STRING_PARM
+                                    parameter_type:
+                                      type: string
+                                      example: 'Standard parameter (fixed values, see further messaging in the parameter_notes)'
+                                    parameter_notes:
+                                      type: string
+                                      example: This fixed string parm represents a parameter that must have one of a discrete number of possible values. This message will contain information about the possible values.
+                                - title: QueryParm2Object
+                                  type: object
+                                  properties:
+                                    parameter_name:
+                                      type: string
+                                      example: STRING_SEARCH_PARM
+                                    parameter_type:
+                                      type: string
+                                      example: String search parameter (generally contains type text search)
+                                    parameter_notes:
+                                      type: string
+                                      example: 'This string_search_parm represents a parameter the will use some form of text matching to limit results. Generally, the text search methodology will be of the contains type, however, the returned notes will specify the type of search methodology.'
+                                - title: QueryParm3Object
+                                  type: object
+                                  properties:
+                                    parameter_name:
+                                      type: string
+                                      example: NUMERIC_PARM
+                                    parameter_type:
+                                      type: string
+                                      example: Numeric parameter
+                                    parameter_notes:
+                                      type: string
+                                      example: This numeric_parm represents a parameter that will be compared to some numeric property of an API resource. There are three formats form numeric values and each indicates a different type of numeric comparison. >999 represents a greater than search. <999 represents a less than search. 999-1000 represents an inclusive range search.
+                                - title: QueryParm4Object
+                                  type: object
+                                  properties:
+                                    parameter_name:
+                                      type: string
+                                      example: DATE_PARM
+                                    parameter_type:
+                                      type: string
+                                      example: Date parameter
+                                    parameter_notes:
+                                      type: string
+                                      example: This date_parm represents a parameter that will be compared to some date property of an API resource. There are three formats form date values and each indicates a different type of date comparison. >MMDDYY represents a greater than date search. <MMDDYY represents a less than date search. MMDDYY-MMDDYY represents an inclusive date range search.
+        '401':
+          description: The authorization GUID used in the request was invalid/expired or the authorization header itself was missing.
+          content:
+            application/json:
+              schema:
+                title: Unauthorized - Invalid/Missing Authorization GUID Response
+                x-tags:
+                  - FailureResponse
+                type: object
+                properties:
+                  ams_api_response:
+                    type: object
+                    properties:
+                      error_state:
+                        type: boolean
+                        example: true
+                      error_msg:
+                        type: string
+                        example: Invalid authorization GUID.
+        '403':
+          description: The API User does not have access to the requested resource.
+          content:
+            application/json:
+              schema:
+                title: Forbidden - Access Not Permitted Response
+                x-tags:
+                  - FailureResponse
+                type: object
+                properties:
+                  ams_api_response:
+                    type: object
+                    required:
+                      - error_state
+                      - error_msg
+                    properties:
+                      error_state:
+                        type: boolean
+                        example: true
+                      error_msg:
+                        oneOf:
+                          - title: HandlerHttpErrorMessage
+                            x-tags:
+                              - Message
+                            type: string
+                            example: The API handler indicated an error condition via the HTTP return code.
+                          - title: InvalidImpersonationGuidMessage
+                            x-tags:
+                              - Message
+                            type: string
+                            example: Invalid Impersonation Guid
+                      endpoint_response:
+                        type: object
+                        properties:
+                          error_msg:
+                            oneOf:
+                              - title: NoApiAccessMessage
+                                x-tags:
+                                  - Message
+                                type: string
+                                example: User does not have access to the called method on the called resource.
+                              - title: AmsUserImpersonationFailureMessage
+                                x-tags:
+                                  - Message
+                                type: string
+                                example: User does not have access to the GET method on the dtc_orders API resource
+                              - title: DtcCustImpersonationFailureMessage
+                                x-tags:
+                                  - Message
+                                type: string
+                                example: 'When impersonating a DTC customer, only actions on that customer are allowed'
+  '/warehouse/v1/ship_customers/{customer_id}':
+    get:
+      operationId: getV1WarehouseShipCustomer
+      tags:
+        - WarehouseShipCustomersGET
+      summary: GET specific customer resource.
+      description: Retrieve a specific product resource by customer ID.
+      parameters:
+        - in: path
+          name: customer_id
+          description: This parameter in the path represents the unique customer_id associated with a specific ship-to customer resource.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Ok - The get of an warehouse ship_customer resource was successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ams_api_response:
+                    type: object
+                    properties:
+                      error_state:
+                        type: boolean
+                        example: false
+                      endpoint_response:
+                        type: object
+                        properties:
+                          ship_customer:
+                            title: V1GETOEShipToCustomerObject
+                            type: object
+                            properties:
+                              activity_status:
+                                title: CustomerActivityStatusEnum
+                                x-tags:
+                                  - Enumeration
+                                type: string
+                                maxLength: 22
+                                enum:
+                                  - Active Customer
+                                  - Inactive Customer
+                                  - High Activity Customer
+                                example: Active Customer
+                              address_1:
+                                type: string
+                                maxLength: 30
+                                example: 4415 Sonoma Highway
+                              address_2:
+                                type: string
+                                maxLength: 30
+                                example: ' '
+                              alc_allocation_code:
+                                type: string
+                                maxLength: 2
+                                example: NA
+                              arl_ar_ledger_code:
+                                type: string
+                                maxLength: 2
+                                example: NA
+                              ars_statement_code:
+                                type: string
+                                maxLength: 2
+                                example: NA
+                              art_ar_terms_code:
+                                type: string
+                                maxLength: 2
+                                example: NA
+                              bill-to-customer_id:
+                                type: integer
+                                minimum: 0
+                                maximum: 9999
+                                example: 0
+                              broker_number:
+                                type: string
+                                maxLength: 4
+                                example: ' '
+                              cfc_customer_financial_code:
+                                type: string
+                                maxLength: 2
+                                example: NA
+                              city:
+                                type: string
+                                maxLength: 24
+                                example: Santa Rosa
+                              corporate_customer_id:
+                                type: integer
+                                minimum: 0
+                                maximum: 9999
+                                example: 125
+                              corporate_customer_report_description:
+                                type: string
+                                maxLength: 30
+                                example: Some great customer
+                              ctr_country_code:
+                                type: string
+                                maxLength: 4
+                                example: NA
+                              cty_customer_type_code:
+                                type: string
+                                maxLength: 4
+                                example: RETL
+                              customer_additional_information:
+                                type: string
+                                maxLength: 30
+                                example: Joe's a great guy!
+                              customer_id:
+                                type: integer
+                                minimum: 1
+                                maximum: 9999
+                                example: 125
+                              customer_report_description:
+                                type: string
+                                maxLength: 30
+                                example: Some great customer
+                              dac_da_class_code:
+                                type: string
+                                maxLength: 4
+                                example: ' '
+                              delivery_instructions_1:
+                                type: string
+                                maxLength: 30
+                                example: Delivery to the back door.
+                              delivery_instructions_2:
+                                type: string
+                                maxLength: 30
+                                example: Sike! Deliver it to the front.
+                              delivery_instructions_3:
+                                type: string
+                                maxLength: 30
+                                example: Haha! Thank you!
+                              delivery_status:
+                                title: DeliveryStatusEnum
+                                x-tags:
+                                  - Enumeration
+                                type: string
+                                maxLength: 24
+                                enum:
+                                  - Check On Delivery
+                                  - Check Before Delivery
+                                  - On Hold
+                                example: Check On Delivery
+                              deplete_to_customer_id:
+                                type: integer
+                                minimum: 0
+                                maximum: 9999
+                                example: 0
+                              div_division_code:
+                                type: string
+                                maxLength: 4
+                                example: NA
+                              dlz_delivery_zone_code:
+                                type: string
+                                maxLength: 2
+                                example: '10'
+                              fgh_freight_code:
+                                type: string
+                                maxLength: 2
+                                example: NA
+                              fips_county_code:
+                                type: string
+                                maxLength: 3
+                                example: 097
+                              ftt_invoice_type_code:
+                                type: string
+                                maxLength: 2
+                                example: '01'
+                              gga_geographic_area:
+                                type: string
+                                maxLength: 4
+                                example: NA
+                              group_to_customer_id:
+                                type: integer
+                                minimum: 0
+                                maximum: 9999
+                                example: 125
+                              group_to_customer_report_description:
+                                type: string
+                                maxLength: 30
+                                example: Some great customer
+                              last_order_date:
+                                type: string
+                                maxLength: 10
+                                example: 09/21/2022
+                              last_pay_date:
+                                type: string
+                                maxLength: 10
+                                example: 10/31/2022
+                              last_sale_date:
+                                type: string
+                                maxLength: 10
+                                example: 09/20/2022
+                              loc_default_ship_location_code:
+                                type: string
+                                maxLength: 2
+                                example: WS
+                              loc_default_to_location_code:
+                                type: string
+                                maxLength: 2
+                                example: '01'
+                              main_contact_name:
+                                type: string
+                                maxLength: 30
+                                example: Joe Schmo
+                              mkt_market_code:
+                                type: string
+                                maxLength: 4
+                                example: NA
+                              mlc_mail_list_code:
+                                type: string
+                                maxLength: 2
+                                example: ND
+                              name:
+                                type: string
+                                maxLength: 30
+                                example: Some wholesale customer
+                              outstanding_order_count:
+                                type: integer
+                                minimum: 0
+                                maximum: 9999
+                                example: 5
+                              phone_number:
+                                type: string
+                                maxLength: 12
+                                example: 707-539-7990
+                              pickslip_pricing_flag:
+                                type: boolean
+                                example: false
+                              prs_pricing_class_code:
+                                type: string
+                                maxLength: 2
+                                example: NA
+                              resale_number:
+                                type: string
+                                maxLength: 18
+                                example: ' '
+                              revised_date:
+                                type: string
+                                maxLength: 10
+                                example: 12/20/2022
+                              rgn_region_code:
+                                type: string
+                                maxLength: 4
+                                example: NA
+                              sales_tax_status:
+                                title: SalesTaxStatusEnum
+                                x-tags:
+                                  - Enumeration
+                                type: string
+                                maxLength: 18
+                                enum:
+                                  - Sales Taxable
+                                  - Sales Not Taxable
+                                example: Sales Taxable
+                              salesman_number:
+                                type: string
+                                maxLength: 4
+                                example: ' '
+                              sat_sales_type_code:
+                                type: string
+                                maxLength: 2
+                                example: WS
+                              scc_state_customer_category_code:
+                                type: string
+                                maxLength: 2
+                                example: NA
+                              sct_sales_category_code:
+                                type: string
+                                maxLength: 2
+                                example: NA
+                              setup_date:
+                                type: string
+                                maxLength: 10
+                                example: 01/01/1991
+                              ship_via:
+                                type: string
+                                maxLength: 20
+                                example: ' '
+                              sph_special_handling_code:
+                                type: string
+                                maxLength: 4
+                                example: NA
+                              state:
+                                type: string
+                                maxLength: 2
+                                example: CA
+                              stx_sales_tax_code:
+                                type: string
+                                maxLength: 2
+                                example: CA
+                              tax_exempt_reason:
+                                title: TaxExemptReasonEnum
+                                x-tags:
+                                  - Enumeration
+                                type: string
+                                maxLength: 14
+                                enum:
+                                  - In Bond
+                                  - Export
+                                  - Unknown
+                                  - Export and Pay
+                                  - Not Exempt
+                                example: Not Exempt
+                              zip_code:
+                                type: string
+                                maxLength: 10
+                                example: 95409
+                              orders:
+                                type: array
+                                items:
+                                  title: V1GETOrderObject
+                                  type: object
+                                  properties:
+                                    consumer_order_flag:
+                                      type: boolean
+                                      example: false
+                                    creation_date:
+                                      type: string
+                                      maxLength: 10
+                                      example: 01/01/2020
+                                    creation_time:
+                                      type: string
+                                      maxLength: 8
+                                      example: '11:35:48'
+                                    creation_user_name:
+                                      type: string
+                                      maxLength: 8
+                                      example: JOE
+                                    description1:
+                                      type: string
+                                      maxLength: 50
+                                      example: ' '
+                                    description2:
+                                      type: string
+                                      maxLength: 50
+                                      example: ' '
+                                    due_date:
+                                      type: string
+                                      maxLength: 10
+                                      example: 01/31/2020
+                                    expected_ship_date:
+                                      type: string
+                                      maxLength: 10
+                                      example: 02/05/2020
+                                    invoice_number:
+                                      type: string
+                                      maxLength: 10
+                                      example: '456789'
+                                    invoice_print_date:
+                                      type: string
+                                      maxLength: 10
+                                      example: 01/15/2020
+                                    last_mod_date:
+                                      type: string
+                                      maxLength: 10
+                                      example: 01/11/2020
+                                    last_mod_time:
+                                      type: string
+                                      maxLength: 8
+                                      example: '12:00:00'
+                                    last_mod_user:
+                                      type: string
+                                      maxLength: 8
+                                      example: JOE
+                                    month_and_year_received:
+                                      type: string
+                                      maxLength: 7
+                                      example: 01/2020
+                                    order_busy_status:
+                                      type: string
+                                      enum:
+                                        - Not Busy
+                                        - Busy for Order Entry
+                                        - Busy for Order Shipping
+                                        - Busy for Invoice Update
+                                      example: Not Busy
+                                    order_confirmation_status:
+                                      type: string
+                                      enum:
+                                        - Needs Confirmed
+                                        - No Confirmation
+                                        - Confirmation Sent
+                                        - Confirmation Cancelled
+                                      example: Confirmation Sent
+                                    order_date:
+                                      type: string
+                                      maxLength: 10
+                                      example: 01/01/2020
+                                    order_additional_freight_amount:
+                                      type: number
+                                      minimum: -9999999.99
+                                      maximum: 9999999.99
+                                      example: 150
+                                    order_consolidation_amount:
+                                      type: number
+                                      minimum: -9999999.99
+                                      maximum: 9999999.99
+                                      example: 0
+                                    order_excise_tax_amount:
+                                      type: number
+                                      minimum: -9999999.99
+                                      maximum: 9999999.99
+                                      example: 150
+                                    order_freight_amount:
+                                      type: number
+                                      minimum: -9999999.99
+                                      maximum: 9999999.99
+                                      example: 150.25
+                                    order_id:
+                                      type: string
+                                      minLength: 1
+                                      maxLength: 11
+                                      example: 104-0
+                                    order_status:
+                                      title: OrdStatusEnum
+                                      type: string
+                                      enum:
+                                        - 05-On_Hold
+                                        - 10-Received
+                                        - 15-Pickslip_Reprint_Pending
+                                        - 20-Pickslip_Printed
+                                        - 25-Bill_of_Lading_Reprint_Pending
+                                        - 30-Bill_of_Lading_Printed
+                                        - 35-Bill_of_Lading_Printed
+                                        - 50-Shipped
+                                        - 60-Invoiced
+                                        - 95-Cancelled
+                                      example: 10-Received
+                                    order_type:
+                                      type: string
+                                      enum:
+                                        - Normal
+                                        - Correction
+                                        - Return
+                                      example: Normal
+                                    otp_order_type_code:
+                                      type: string
+                                      maxLength: 10
+                                      example: Club
+                                    pickslip_date:
+                                      type: string
+                                      maxLength: 10
+                                      example: 01/13/2020
+                                    pickslip_print_count:
+                                      type: integer
+                                      minimum: 0
+                                      maximum: 9999
+                                    pickslip_time:
+                                      type: string
+                                      maxLength: 8
+                                      example: '13:44:50'
+                                    purchase_order_number:
+                                      type: string
+                                      maxLength: 10
+                                      example: '123456'
+                                    refer_to_invoice_number:
+                                      type: integer
+                                      minimum: 0
+                                      maximum: 9999999999
+                                    report_to_state_flag:
+                                      type: boolean
+                                      example: true
+                                    shipment_advisement_status:
+                                      type: string
+                                      enum:
+                                        - Shipment Advisement Needed
+                                        - No Shipment Advisement
+                                        - Shipment Advisement Sent
+                                      example: No Shipment Advisement
+                                    ship_date:
+                                      type: string
+                                      maxLength: 10
+                                      example: 01/15/2020
+                                    ship_user_name:
+                                      type: string
+                                      maxLength: 8
+                                      example: JOE
+                                    ship_via_text:
+                                      type: string
+                                      maxLength: 30
+                                      example: Via Ray's Trucking
+                                    ship_with_reference_number:
+                                      type: string
+                                      maxLength: 20
+                                      example: A56498
+                                    status_date:
+                                      type: string
+                                      maxLength: 10
+                                      example: 01/12/2020
+                                    total_weight_in_pounds:
+                                      type: number
+                                      minimum: 0
+                                      maximum: 9999999.99
+                                      example: 3562.1
+                                    whole_cases_ordered:
+                                      type: number
+                                      minimum: -9999999.99
+                                      maximum: 9999999.99
+                                      example: 112
+                                    whole_cases_shipped:
+                                      type: number
+                                      minimum: -9999999.99
+                                      maximum: 9999999.99
+                                      example: 112
+                                    whs_warehouse_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: 8W
+                                    winery_reference_number:
+                                      type: string
+                                      maxLength: 20
+                                      example: A56498
+                                    win_winery_code:
+                                      type: string
+                                      maxLength: 4
+                                      example: AV
+                              contacts:
+                                type: array
+                                items:
+                                  title: V1GETContactObject
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: integer
+                                      minimum: 1
+                                      maximum: 4
+                                      example: 1
+                                    contact_type:
+                                      title: ContactTypeEnum
+                                      x-tags:
+                                        - Enumeration
+                                      type: string
+                                      maxLength: 24
+                                      enum:
+                                        - Accounts Receivable
+                                        - Invoice
+                                        - Wholesale Order
+                                        - Direct-To-Consumer Order
+                                    contact_name:
+                                      type: string
+                                      maxLength: 30
+                                      example: Karen at the co-op
+                                    address_1:
+                                      type: string
+                                      maxLength: 30
+                                      example: 4415 Sonoma Highway
+                                    address_2:
+                                      type: string
+                                      maxLength: 30
+                                      example: ' '
+                                    city:
+                                      type: string
+                                      maxLength: 24
+                                      example: Santa Rosa
+                                    state:
+                                      type: string
+                                      maxLength: 2
+                                      example: CA
+                                    zipcode:
+                                      type: string
+                                      maxLength: 10
+                                      example: '95409'
+                                    phone:
+                                      type: string
+                                      maxLength: 16
+                                      example: 707-539-7990
+                                    email:
+                                      type: string
+                                      maxLength: 256
+                                      example: orders@amssoftware.com;customerservice@amssoftware.com
+                                    ocd_distribution_list_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: WB
+        '401':
+          description: The authorization GUID used in the request was invalid/expired or the authorization header itself was missing.
+          content:
+            application/json:
+              schema:
+                title: Unauthorized - Invalid/Missing Authorization GUID Response
+                x-tags:
+                  - FailureResponse
+                type: object
+                properties:
+                  ams_api_response:
+                    type: object
+                    properties:
+                      error_state:
+                        type: boolean
+                        example: true
+                      error_msg:
+                        type: string
+                        example: Invalid authorization GUID.
+        '403':
+          description: The API User does not have access to the requested resource.
+          content:
+            application/json:
+              schema:
+                title: Forbidden - Access Not Permitted Response
+                x-tags:
+                  - FailureResponse
+                type: object
+                properties:
+                  ams_api_response:
+                    type: object
+                    required:
+                      - error_state
+                      - error_msg
+                    properties:
+                      error_state:
+                        type: boolean
+                        example: true
+                      error_msg:
+                        oneOf:
+                          - title: HandlerHttpErrorMessage
+                            x-tags:
+                              - Message
+                            type: string
+                            example: The API handler indicated an error condition via the HTTP return code.
+                          - title: InvalidImpersonationGuidMessage
+                            x-tags:
+                              - Message
+                            type: string
+                            example: Invalid Impersonation Guid
+                      endpoint_response:
+                        type: object
+                        properties:
+                          error_msg:
+                            oneOf:
+                              - title: NoApiAccessMessage
+                                x-tags:
+                                  - Message
+                                type: string
+                                example: User does not have access to the called method on the called resource.
+                              - title: AmsUserImpersonationFailureMessage
+                                x-tags:
+                                  - Message
+                                type: string
+                                example: User does not have access to the GET method on the dtc_orders API resource
+                              - title: DtcCustImpersonationFailureMessage
+                                x-tags:
+                                  - Message
+                                type: string
+                                example: 'When impersonating a DTC customer, only actions on that customer are allowed'
+        '404':
+          description: The requested API resource does not exist.
+          content:
+            application/json:
+              schema:
+                title: Not Found - Resource Does Not Exist Response
+                x-tags:
+                  - FailureResponse
+                type: object
+                properties:
+                  ams_api_response:
+                    type: object
+                    properties:
+                      error_state:
+                        type: boolean
+                        example: true
+                      error_msg:
+                        title: HandlerHttpErrorMessage
+                        x-tags:
+                          - Message
+                        type: string
+                        example: The API handler indicated an error condition via the HTTP return code.
+                      endpoint_response:
+                        type: object
+                        properties:
+                          error_msg:
+                            title: ResourceNotFoundMessage
+                            x-tags:
+                              - Message
+                            type: string
+                            example: API resource with provided ID not found.
+  '/warehouse/v1/ship_customers/{customer_id}/orders':
+    get:
+      operationId: getV1WarehouseShipCustomerOrders
+      tags:
+        - WarehouseShipCustomersGET
+      summary: GET orders array for specific customer resource.
+      description: Retrieve order information for a specific customer resource.
+      parameters:
+        - in: path
+          name: customer_id
+          description: This parameter in the path represents the unique customer_id associated with a specific ship-to customer resource.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Ok - The get of the orders array for a ship_customer was successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ams_api_response:
+                    type: object
+                    properties:
+                      error_state:
+                        type: boolean
+                        example: false
+                      endpoint_response:
+                        type: object
+                        properties:
+                          orders:
+                            type: array
+                            items:
+                              title: V1GETOrderObject
+                              type: object
+                              properties:
+                                consumer_order_flag:
+                                  type: boolean
+                                  example: false
+                                creation_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 01/01/2020
+                                creation_time:
+                                  type: string
+                                  maxLength: 8
+                                  example: '11:35:48'
+                                creation_user_name:
+                                  type: string
+                                  maxLength: 8
+                                  example: JOE
+                                description1:
+                                  type: string
+                                  maxLength: 50
+                                  example: ' '
+                                description2:
+                                  type: string
+                                  maxLength: 50
+                                  example: ' '
+                                due_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 01/31/2020
+                                expected_ship_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 02/05/2020
+                                invoice_number:
+                                  type: string
+                                  maxLength: 10
+                                  example: '456789'
+                                invoice_print_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 01/15/2020
+                                last_mod_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 01/11/2020
+                                last_mod_time:
+                                  type: string
+                                  maxLength: 8
+                                  example: '12:00:00'
+                                last_mod_user:
+                                  type: string
+                                  maxLength: 8
+                                  example: JOE
+                                month_and_year_received:
+                                  type: string
+                                  maxLength: 7
+                                  example: 01/2020
+                                order_busy_status:
+                                  type: string
+                                  enum:
+                                    - Not Busy
+                                    - Busy for Order Entry
+                                    - Busy for Order Shipping
+                                    - Busy for Invoice Update
+                                  example: Not Busy
+                                order_confirmation_status:
+                                  type: string
+                                  enum:
+                                    - Needs Confirmed
+                                    - No Confirmation
+                                    - Confirmation Sent
+                                    - Confirmation Cancelled
+                                  example: Confirmation Sent
+                                order_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 01/01/2020
+                                order_additional_freight_amount:
+                                  type: number
+                                  minimum: -9999999.99
+                                  maximum: 9999999.99
+                                  example: 150
+                                order_consolidation_amount:
+                                  type: number
+                                  minimum: -9999999.99
+                                  maximum: 9999999.99
+                                  example: 0
+                                order_excise_tax_amount:
+                                  type: number
+                                  minimum: -9999999.99
+                                  maximum: 9999999.99
+                                  example: 150
+                                order_freight_amount:
+                                  type: number
+                                  minimum: -9999999.99
+                                  maximum: 9999999.99
+                                  example: 150.25
+                                order_id:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 11
+                                  example: 104-0
+                                order_status:
+                                  title: OrdStatusEnum
+                                  type: string
+                                  enum:
+                                    - 05-On_Hold
+                                    - 10-Received
+                                    - 15-Pickslip_Reprint_Pending
+                                    - 20-Pickslip_Printed
+                                    - 25-Bill_of_Lading_Reprint_Pending
+                                    - 30-Bill_of_Lading_Printed
+                                    - 35-Bill_of_Lading_Printed
+                                    - 50-Shipped
+                                    - 60-Invoiced
+                                    - 95-Cancelled
+                                  example: 10-Received
+                                order_type:
+                                  type: string
+                                  enum:
+                                    - Normal
+                                    - Correction
+                                    - Return
+                                  example: Normal
+                                otp_order_type_code:
+                                  type: string
+                                  maxLength: 10
+                                  example: Club
+                                pickslip_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 01/13/2020
+                                pickslip_print_count:
+                                  type: integer
+                                  minimum: 0
+                                  maximum: 9999
+                                pickslip_time:
+                                  type: string
+                                  maxLength: 8
+                                  example: '13:44:50'
+                                purchase_order_number:
+                                  type: string
+                                  maxLength: 10
+                                  example: '123456'
+                                refer_to_invoice_number:
+                                  type: integer
+                                  minimum: 0
+                                  maximum: 9999999999
+                                report_to_state_flag:
+                                  type: boolean
+                                  example: true
+                                shipment_advisement_status:
+                                  type: string
+                                  enum:
+                                    - Shipment Advisement Needed
+                                    - No Shipment Advisement
+                                    - Shipment Advisement Sent
+                                  example: No Shipment Advisement
+                                ship_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 01/15/2020
+                                ship_user_name:
+                                  type: string
+                                  maxLength: 8
+                                  example: JOE
+                                ship_via_text:
+                                  type: string
+                                  maxLength: 30
+                                  example: Via Ray's Trucking
+                                ship_with_reference_number:
+                                  type: string
+                                  maxLength: 20
+                                  example: A56498
+                                status_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 01/12/2020
+                                total_weight_in_pounds:
+                                  type: number
+                                  minimum: 0
+                                  maximum: 9999999.99
+                                  example: 3562.1
+                                whole_cases_ordered:
+                                  type: number
+                                  minimum: -9999999.99
+                                  maximum: 9999999.99
+                                  example: 112
+                                whole_cases_shipped:
+                                  type: number
+                                  minimum: -9999999.99
+                                  maximum: 9999999.99
+                                  example: 112
+                                whs_warehouse_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: 8W
+                                winery_reference_number:
+                                  type: string
+                                  maxLength: 20
+                                  example: A56498
+                                win_winery_code:
+                                  type: string
+                                  maxLength: 4
+                                  example: AV
+        '401':
+          description: The authorization GUID used in the request was invalid/expired or the authorization header itself was missing.
+          content:
+            application/json:
+              schema:
+                title: Unauthorized - Invalid/Missing Authorization GUID Response
+                x-tags:
+                  - FailureResponse
+                type: object
+                properties:
+                  ams_api_response:
+                    type: object
+                    properties:
+                      error_state:
+                        type: boolean
+                        example: true
+                      error_msg:
+                        type: string
+                        example: Invalid authorization GUID.
+        '403':
+          description: The API User does not have access to the requested resource.
+          content:
+            application/json:
+              schema:
+                title: Forbidden - Access Not Permitted Response
+                x-tags:
+                  - FailureResponse
+                type: object
+                properties:
+                  ams_api_response:
+                    type: object
+                    required:
+                      - error_state
+                      - error_msg
+                    properties:
+                      error_state:
+                        type: boolean
+                        example: true
+                      error_msg:
+                        oneOf:
+                          - title: HandlerHttpErrorMessage
+                            x-tags:
+                              - Message
+                            type: string
+                            example: The API handler indicated an error condition via the HTTP return code.
+                          - title: InvalidImpersonationGuidMessage
+                            x-tags:
+                              - Message
+                            type: string
+                            example: Invalid Impersonation Guid
+                      endpoint_response:
+                        type: object
+                        properties:
+                          error_msg:
+                            oneOf:
+                              - title: NoApiAccessMessage
+                                x-tags:
+                                  - Message
+                                type: string
+                                example: User does not have access to the called method on the called resource.
+                              - title: AmsUserImpersonationFailureMessage
+                                x-tags:
+                                  - Message
+                                type: string
+                                example: User does not have access to the GET method on the dtc_orders API resource
+                              - title: DtcCustImpersonationFailureMessage
+                                x-tags:
+                                  - Message
+                                type: string
+                                example: 'When impersonating a DTC customer, only actions on that customer are allowed'
+        '404':
+          description: The requested API resource does not exist.
+          content:
+            application/json:
+              schema:
+                title: Not Found - Resource Does Not Exist Response
+                x-tags:
+                  - FailureResponse
+                type: object
+                properties:
+                  ams_api_response:
+                    type: object
+                    properties:
+                      error_state:
+                        type: boolean
+                        example: true
+                      error_msg:
+                        title: HandlerHttpErrorMessage
+                        x-tags:
+                          - Message
+                        type: string
+                        example: The API handler indicated an error condition via the HTTP return code.
+                      endpoint_response:
+                        type: object
+                        properties:
+                          error_msg:
+                            title: ResourceNotFoundMessage
+                            x-tags:
+                              - Message
+                            type: string
+                            example: API resource with provided ID not found.
+  '/warehouse/v1/ship_customers/{customer_id}/contacts':
+    get:
+      operationId: getV1WarehouseShipCustomerContacts
+      tags:
+        - WarehouseShipCustomersGET
+      summary: GET contacts array for specific customer resource.
+      description: Retrieve the various defined contacts for a specific customer resource.
+      parameters:
+        - in: path
+          name: customer_id
+          description: This parameter in the path represents the unique customer_id associated with a specific ship-to customer resource.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Ok - The get of the contacts array for a customer was successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ams_api_response:
+                    type: object
+                    properties:
+                      error_state:
+                        type: boolean
+                        example: false
+                      endpoint_response:
+                        type: object
+                        properties:
+                          contacts:
+                            type: array
+                            items:
+                              title: V1GETContactObject
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                  minimum: 1
+                                  maximum: 4
+                                  example: 1
+                                contact_type:
+                                  title: ContactTypeEnum
+                                  x-tags:
+                                    - Enumeration
+                                  type: string
+                                  maxLength: 24
+                                  enum:
+                                    - Accounts Receivable
+                                    - Invoice
+                                    - Wholesale Order
+                                    - Direct-To-Consumer Order
+                                contact_name:
+                                  type: string
+                                  maxLength: 30
+                                  example: Karen at the co-op
+                                address_1:
+                                  type: string
+                                  maxLength: 30
+                                  example: 4415 Sonoma Highway
+                                address_2:
+                                  type: string
+                                  maxLength: 30
+                                  example: ' '
+                                city:
+                                  type: string
+                                  maxLength: 24
+                                  example: Santa Rosa
+                                state:
+                                  type: string
+                                  maxLength: 2
+                                  example: CA
+                                zipcode:
+                                  type: string
+                                  maxLength: 10
+                                  example: '95409'
+                                phone:
+                                  type: string
+                                  maxLength: 16
+                                  example: 707-539-7990
+                                email:
+                                  type: string
+                                  maxLength: 256
+                                  example: orders@amssoftware.com;customerservice@amssoftware.com
+                                ocd_distribution_list_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: WB
+        '401':
+          description: The authorization GUID used in the request was invalid/expired or the authorization header itself was missing.
+          content:
+            application/json:
+              schema:
+                title: Unauthorized - Invalid/Missing Authorization GUID Response
+                x-tags:
+                  - FailureResponse
+                type: object
+                properties:
+                  ams_api_response:
+                    type: object
+                    properties:
+                      error_state:
+                        type: boolean
+                        example: true
+                      error_msg:
+                        type: string
+                        example: Invalid authorization GUID.
+        '403':
+          description: The API User does not have access to the requested resource.
+          content:
+            application/json:
+              schema:
+                title: Forbidden - Access Not Permitted Response
+                x-tags:
+                  - FailureResponse
+                type: object
+                properties:
+                  ams_api_response:
+                    type: object
+                    required:
+                      - error_state
+                      - error_msg
+                    properties:
+                      error_state:
+                        type: boolean
+                        example: true
+                      error_msg:
+                        oneOf:
+                          - title: HandlerHttpErrorMessage
+                            x-tags:
+                              - Message
+                            type: string
+                            example: The API handler indicated an error condition via the HTTP return code.
+                          - title: InvalidImpersonationGuidMessage
+                            x-tags:
+                              - Message
+                            type: string
+                            example: Invalid Impersonation Guid
+                      endpoint_response:
+                        type: object
+                        properties:
+                          error_msg:
+                            oneOf:
+                              - title: NoApiAccessMessage
+                                x-tags:
+                                  - Message
+                                type: string
+                                example: User does not have access to the called method on the called resource.
+                              - title: AmsUserImpersonationFailureMessage
+                                x-tags:
+                                  - Message
+                                type: string
+                                example: User does not have access to the GET method on the dtc_orders API resource
+                              - title: DtcCustImpersonationFailureMessage
+                                x-tags:
+                                  - Message
+                                type: string
+                                example: 'When impersonating a DTC customer, only actions on that customer are allowed'
+        '404':
+          description: The requested API resource does not exist.
+          content:
+            application/json:
+              schema:
+                title: Not Found - Resource Does Not Exist Response
+                x-tags:
+                  - FailureResponse
+                type: object
+                properties:
+                  ams_api_response:
+                    type: object
+                    properties:
+                      error_state:
+                        type: boolean
+                        example: true
+                      error_msg:
+                        title: HandlerHttpErrorMessage
+                        x-tags:
+                          - Message
+                        type: string
+                        example: The API handler indicated an error condition via the HTTP return code.
+                      endpoint_response:
+                        type: object
+                        properties:
+                          error_msg:
+                            title: ResourceNotFoundMessage
+                            x-tags:
+                              - Message
+                            type: string
+                            example: API resource with provided ID not found.
+components:
+  securitySchemes:
+    AMSBearerAuth:
+      type: http
+      scheme: bearer
+    AMSImpersonationAuth:
+      type: apiKey
+      in: header
+      name: Impersonation-Token
+  parameters:
+    PaginationQueryParm:
+      name: pagination
+      in: query
+      description: 'Query parameter that will allow for retrieving "pages" of results from the ship_customers resource. The format of the value passed must be the following, {number1},{number2}. The first numeric value indicates the number of results per page and the second numeric value indicates the requested page of results.'
+      required: false
+      schema:
+        type: string
+    CustomerIDPathParm:
+      in: path
+      name: customer_id
+      description: This parameter in the path represents the unique customer_id associated with a specific ship-to customer resource.
+      required: true
+      schema:
+        type: integer
+  responses:
+    200V1SuccessfulShipCustomersGet:
+      description: Ok - The query of the warehouse ship_customers resource was successful.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ams_api_response:
+                type: object
+                properties:
+                  error_state:
+                    type: boolean
+                    example: false
+                  endpoint_response:
+                    type: object
+                    properties:
+                      query_results:
+                        type: object
+                        properties:
+                          ship_customers_found:
+                            type: integer
+                            example: 1
+                          ship_customers:
+                            type: array
+                            items:
+                              title: V1GETOEShipToCustomerObject
+                              type: object
+                              properties:
+                                activity_status:
+                                  title: CustomerActivityStatusEnum
+                                  x-tags:
+                                    - Enumeration
+                                  type: string
+                                  maxLength: 22
+                                  enum:
+                                    - Active Customer
+                                    - Inactive Customer
+                                    - High Activity Customer
+                                  example: Active Customer
+                                address_1:
+                                  type: string
+                                  maxLength: 30
+                                  example: 4415 Sonoma Highway
+                                address_2:
+                                  type: string
+                                  maxLength: 30
+                                  example: ' '
+                                alc_allocation_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: NA
+                                arl_ar_ledger_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: NA
+                                ars_statement_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: NA
+                                art_ar_terms_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: NA
+                                bill-to-customer_id:
+                                  type: integer
+                                  minimum: 0
+                                  maximum: 9999
+                                  example: 0
+                                broker_number:
+                                  type: string
+                                  maxLength: 4
+                                  example: ' '
+                                cfc_customer_financial_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: NA
+                                city:
+                                  type: string
+                                  maxLength: 24
+                                  example: Santa Rosa
+                                corporate_customer_id:
+                                  type: integer
+                                  minimum: 0
+                                  maximum: 9999
+                                  example: 125
+                                corporate_customer_report_description:
+                                  type: string
+                                  maxLength: 30
+                                  example: Some great customer
+                                ctr_country_code:
+                                  type: string
+                                  maxLength: 4
+                                  example: NA
+                                cty_customer_type_code:
+                                  type: string
+                                  maxLength: 4
+                                  example: RETL
+                                customer_additional_information:
+                                  type: string
+                                  maxLength: 30
+                                  example: Joe's a great guy!
+                                customer_id:
+                                  type: integer
+                                  minimum: 1
+                                  maximum: 9999
+                                  example: 125
+                                customer_report_description:
+                                  type: string
+                                  maxLength: 30
+                                  example: Some great customer
+                                dac_da_class_code:
+                                  type: string
+                                  maxLength: 4
+                                  example: ' '
+                                delivery_instructions_1:
+                                  type: string
+                                  maxLength: 30
+                                  example: Delivery to the back door.
+                                delivery_instructions_2:
+                                  type: string
+                                  maxLength: 30
+                                  example: Sike! Deliver it to the front.
+                                delivery_instructions_3:
+                                  type: string
+                                  maxLength: 30
+                                  example: Haha! Thank you!
+                                delivery_status:
+                                  title: DeliveryStatusEnum
+                                  x-tags:
+                                    - Enumeration
+                                  type: string
+                                  maxLength: 24
+                                  enum:
+                                    - Check On Delivery
+                                    - Check Before Delivery
+                                    - On Hold
+                                  example: Check On Delivery
+                                deplete_to_customer_id:
+                                  type: integer
+                                  minimum: 0
+                                  maximum: 9999
+                                  example: 0
+                                div_division_code:
+                                  type: string
+                                  maxLength: 4
+                                  example: NA
+                                dlz_delivery_zone_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: '10'
+                                fgh_freight_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: NA
+                                fips_county_code:
+                                  type: string
+                                  maxLength: 3
+                                  example: 097
+                                ftt_invoice_type_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: '01'
+                                gga_geographic_area:
+                                  type: string
+                                  maxLength: 4
+                                  example: NA
+                                group_to_customer_id:
+                                  type: integer
+                                  minimum: 0
+                                  maximum: 9999
+                                  example: 125
+                                group_to_customer_report_description:
+                                  type: string
+                                  maxLength: 30
+                                  example: Some great customer
+                                last_order_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 09/21/2022
+                                last_pay_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 10/31/2022
+                                last_sale_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 09/20/2022
+                                loc_default_ship_location_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: WS
+                                loc_default_to_location_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: '01'
+                                main_contact_name:
+                                  type: string
+                                  maxLength: 30
+                                  example: Joe Schmo
+                                mkt_market_code:
+                                  type: string
+                                  maxLength: 4
+                                  example: NA
+                                mlc_mail_list_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: ND
+                                name:
+                                  type: string
+                                  maxLength: 30
+                                  example: Some wholesale customer
+                                outstanding_order_count:
+                                  type: integer
+                                  minimum: 0
+                                  maximum: 9999
+                                  example: 5
+                                phone_number:
+                                  type: string
+                                  maxLength: 12
+                                  example: 707-539-7990
+                                pickslip_pricing_flag:
+                                  type: boolean
+                                  example: false
+                                prs_pricing_class_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: NA
+                                resale_number:
+                                  type: string
+                                  maxLength: 18
+                                  example: ' '
+                                revised_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 12/20/2022
+                                rgn_region_code:
+                                  type: string
+                                  maxLength: 4
+                                  example: NA
+                                sales_tax_status:
+                                  title: SalesTaxStatusEnum
+                                  x-tags:
+                                    - Enumeration
+                                  type: string
+                                  maxLength: 18
+                                  enum:
+                                    - Sales Taxable
+                                    - Sales Not Taxable
+                                  example: Sales Taxable
+                                salesman_number:
+                                  type: string
+                                  maxLength: 4
+                                  example: ' '
+                                sat_sales_type_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: WS
+                                scc_state_customer_category_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: NA
+                                sct_sales_category_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: NA
+                                setup_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 01/01/1991
+                                ship_via:
+                                  type: string
+                                  maxLength: 20
+                                  example: ' '
+                                sph_special_handling_code:
+                                  type: string
+                                  maxLength: 4
+                                  example: NA
+                                state:
+                                  type: string
+                                  maxLength: 2
+                                  example: CA
+                                stx_sales_tax_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: CA
+                                tax_exempt_reason:
+                                  title: TaxExemptReasonEnum
+                                  x-tags:
+                                    - Enumeration
+                                  type: string
+                                  maxLength: 14
+                                  enum:
+                                    - In Bond
+                                    - Export
+                                    - Unknown
+                                    - Export and Pay
+                                    - Not Exempt
+                                  example: Not Exempt
+                                zip_code:
+                                  type: string
+                                  maxLength: 10
+                                  example: 95409
+                                orders:
+                                  type: array
+                                  items:
+                                    title: V1GETOrderObject
+                                    type: object
+                                    properties:
+                                      consumer_order_flag:
+                                        type: boolean
+                                        example: false
+                                      creation_date:
+                                        type: string
+                                        maxLength: 10
+                                        example: 01/01/2020
+                                      creation_time:
+                                        type: string
+                                        maxLength: 8
+                                        example: '11:35:48'
+                                      creation_user_name:
+                                        type: string
+                                        maxLength: 8
+                                        example: JOE
+                                      description1:
+                                        type: string
+                                        maxLength: 50
+                                        example: ' '
+                                      description2:
+                                        type: string
+                                        maxLength: 50
+                                        example: ' '
+                                      due_date:
+                                        type: string
+                                        maxLength: 10
+                                        example: 01/31/2020
+                                      expected_ship_date:
+                                        type: string
+                                        maxLength: 10
+                                        example: 02/05/2020
+                                      invoice_number:
+                                        type: string
+                                        maxLength: 10
+                                        example: '456789'
+                                      invoice_print_date:
+                                        type: string
+                                        maxLength: 10
+                                        example: 01/15/2020
+                                      last_mod_date:
+                                        type: string
+                                        maxLength: 10
+                                        example: 01/11/2020
+                                      last_mod_time:
+                                        type: string
+                                        maxLength: 8
+                                        example: '12:00:00'
+                                      last_mod_user:
+                                        type: string
+                                        maxLength: 8
+                                        example: JOE
+                                      month_and_year_received:
+                                        type: string
+                                        maxLength: 7
+                                        example: 01/2020
+                                      order_busy_status:
+                                        type: string
+                                        enum:
+                                          - Not Busy
+                                          - Busy for Order Entry
+                                          - Busy for Order Shipping
+                                          - Busy for Invoice Update
+                                        example: Not Busy
+                                      order_confirmation_status:
+                                        type: string
+                                        enum:
+                                          - Needs Confirmed
+                                          - No Confirmation
+                                          - Confirmation Sent
+                                          - Confirmation Cancelled
+                                        example: Confirmation Sent
+                                      order_date:
+                                        type: string
+                                        maxLength: 10
+                                        example: 01/01/2020
+                                      order_additional_freight_amount:
+                                        type: number
+                                        minimum: -9999999.99
+                                        maximum: 9999999.99
+                                        example: 150
+                                      order_consolidation_amount:
+                                        type: number
+                                        minimum: -9999999.99
+                                        maximum: 9999999.99
+                                        example: 0
+                                      order_excise_tax_amount:
+                                        type: number
+                                        minimum: -9999999.99
+                                        maximum: 9999999.99
+                                        example: 150
+                                      order_freight_amount:
+                                        type: number
+                                        minimum: -9999999.99
+                                        maximum: 9999999.99
+                                        example: 150.25
+                                      order_id:
+                                        type: string
+                                        minLength: 1
+                                        maxLength: 11
+                                        example: 104-0
+                                      order_status:
+                                        title: OrdStatusEnum
+                                        type: string
+                                        enum:
+                                          - 05-On_Hold
+                                          - 10-Received
+                                          - 15-Pickslip_Reprint_Pending
+                                          - 20-Pickslip_Printed
+                                          - 25-Bill_of_Lading_Reprint_Pending
+                                          - 30-Bill_of_Lading_Printed
+                                          - 35-Bill_of_Lading_Printed
+                                          - 50-Shipped
+                                          - 60-Invoiced
+                                          - 95-Cancelled
+                                        example: 10-Received
+                                      order_type:
+                                        type: string
+                                        enum:
+                                          - Normal
+                                          - Correction
+                                          - Return
+                                        example: Normal
+                                      otp_order_type_code:
+                                        type: string
+                                        maxLength: 10
+                                        example: Club
+                                      pickslip_date:
+                                        type: string
+                                        maxLength: 10
+                                        example: 01/13/2020
+                                      pickslip_print_count:
+                                        type: integer
+                                        minimum: 0
+                                        maximum: 9999
+                                      pickslip_time:
+                                        type: string
+                                        maxLength: 8
+                                        example: '13:44:50'
+                                      purchase_order_number:
+                                        type: string
+                                        maxLength: 10
+                                        example: '123456'
+                                      refer_to_invoice_number:
+                                        type: integer
+                                        minimum: 0
+                                        maximum: 9999999999
+                                      report_to_state_flag:
+                                        type: boolean
+                                        example: true
+                                      shipment_advisement_status:
+                                        type: string
+                                        enum:
+                                          - Shipment Advisement Needed
+                                          - No Shipment Advisement
+                                          - Shipment Advisement Sent
+                                        example: No Shipment Advisement
+                                      ship_date:
+                                        type: string
+                                        maxLength: 10
+                                        example: 01/15/2020
+                                      ship_user_name:
+                                        type: string
+                                        maxLength: 8
+                                        example: JOE
+                                      ship_via_text:
+                                        type: string
+                                        maxLength: 30
+                                        example: Via Ray's Trucking
+                                      ship_with_reference_number:
+                                        type: string
+                                        maxLength: 20
+                                        example: A56498
+                                      status_date:
+                                        type: string
+                                        maxLength: 10
+                                        example: 01/12/2020
+                                      total_weight_in_pounds:
+                                        type: number
+                                        minimum: 0
+                                        maximum: 9999999.99
+                                        example: 3562.1
+                                      whole_cases_ordered:
+                                        type: number
+                                        minimum: -9999999.99
+                                        maximum: 9999999.99
+                                        example: 112
+                                      whole_cases_shipped:
+                                        type: number
+                                        minimum: -9999999.99
+                                        maximum: 9999999.99
+                                        example: 112
+                                      whs_warehouse_code:
+                                        type: string
+                                        maxLength: 2
+                                        example: 8W
+                                      winery_reference_number:
+                                        type: string
+                                        maxLength: 20
+                                        example: A56498
+                                      win_winery_code:
+                                        type: string
+                                        maxLength: 4
+                                        example: AV
+                                contacts:
+                                  type: array
+                                  items:
+                                    title: V1GETContactObject
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: integer
+                                        minimum: 1
+                                        maximum: 4
+                                        example: 1
+                                      contact_type:
+                                        title: ContactTypeEnum
+                                        x-tags:
+                                          - Enumeration
+                                        type: string
+                                        maxLength: 24
+                                        enum:
+                                          - Accounts Receivable
+                                          - Invoice
+                                          - Wholesale Order
+                                          - Direct-To-Consumer Order
+                                      contact_name:
+                                        type: string
+                                        maxLength: 30
+                                        example: Karen at the co-op
+                                      address_1:
+                                        type: string
+                                        maxLength: 30
+                                        example: 4415 Sonoma Highway
+                                      address_2:
+                                        type: string
+                                        maxLength: 30
+                                        example: ' '
+                                      city:
+                                        type: string
+                                        maxLength: 24
+                                        example: Santa Rosa
+                                      state:
+                                        type: string
+                                        maxLength: 2
+                                        example: CA
+                                      zipcode:
+                                        type: string
+                                        maxLength: 10
+                                        example: '95409'
+                                      phone:
+                                        type: string
+                                        maxLength: 16
+                                        example: 707-539-7990
+                                      email:
+                                        type: string
+                                        maxLength: 256
+                                        example: orders@amssoftware.com;customerservice@amssoftware.com
+                                      ocd_distribution_list_code:
+                                        type: string
+                                        maxLength: 2
+                                        example: WB
+    200V1SuccessfulShipCustomerGet:
+      description: Ok - The get of an warehouse ship_customer resource was successful
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ams_api_response:
+                type: object
+                properties:
+                  error_state:
+                    type: boolean
+                    example: false
+                  endpoint_response:
+                    type: object
+                    properties:
+                      ship_customer:
+                        title: V1GETOEShipToCustomerObject
+                        type: object
+                        properties:
+                          activity_status:
+                            title: CustomerActivityStatusEnum
+                            x-tags:
+                              - Enumeration
+                            type: string
+                            maxLength: 22
+                            enum:
+                              - Active Customer
+                              - Inactive Customer
+                              - High Activity Customer
+                            example: Active Customer
+                          address_1:
+                            type: string
+                            maxLength: 30
+                            example: 4415 Sonoma Highway
+                          address_2:
+                            type: string
+                            maxLength: 30
+                            example: ' '
+                          alc_allocation_code:
+                            type: string
+                            maxLength: 2
+                            example: NA
+                          arl_ar_ledger_code:
+                            type: string
+                            maxLength: 2
+                            example: NA
+                          ars_statement_code:
+                            type: string
+                            maxLength: 2
+                            example: NA
+                          art_ar_terms_code:
+                            type: string
+                            maxLength: 2
+                            example: NA
+                          bill-to-customer_id:
+                            type: integer
+                            minimum: 0
+                            maximum: 9999
+                            example: 0
+                          broker_number:
+                            type: string
+                            maxLength: 4
+                            example: ' '
+                          cfc_customer_financial_code:
+                            type: string
+                            maxLength: 2
+                            example: NA
+                          city:
+                            type: string
+                            maxLength: 24
+                            example: Santa Rosa
+                          corporate_customer_id:
+                            type: integer
+                            minimum: 0
+                            maximum: 9999
+                            example: 125
+                          corporate_customer_report_description:
+                            type: string
+                            maxLength: 30
+                            example: Some great customer
+                          ctr_country_code:
+                            type: string
+                            maxLength: 4
+                            example: NA
+                          cty_customer_type_code:
+                            type: string
+                            maxLength: 4
+                            example: RETL
+                          customer_additional_information:
+                            type: string
+                            maxLength: 30
+                            example: Joe's a great guy!
+                          customer_id:
+                            type: integer
+                            minimum: 1
+                            maximum: 9999
+                            example: 125
+                          customer_report_description:
+                            type: string
+                            maxLength: 30
+                            example: Some great customer
+                          dac_da_class_code:
+                            type: string
+                            maxLength: 4
+                            example: ' '
+                          delivery_instructions_1:
+                            type: string
+                            maxLength: 30
+                            example: Delivery to the back door.
+                          delivery_instructions_2:
+                            type: string
+                            maxLength: 30
+                            example: Sike! Deliver it to the front.
+                          delivery_instructions_3:
+                            type: string
+                            maxLength: 30
+                            example: Haha! Thank you!
+                          delivery_status:
+                            title: DeliveryStatusEnum
+                            x-tags:
+                              - Enumeration
+                            type: string
+                            maxLength: 24
+                            enum:
+                              - Check On Delivery
+                              - Check Before Delivery
+                              - On Hold
+                            example: Check On Delivery
+                          deplete_to_customer_id:
+                            type: integer
+                            minimum: 0
+                            maximum: 9999
+                            example: 0
+                          div_division_code:
+                            type: string
+                            maxLength: 4
+                            example: NA
+                          dlz_delivery_zone_code:
+                            type: string
+                            maxLength: 2
+                            example: '10'
+                          fgh_freight_code:
+                            type: string
+                            maxLength: 2
+                            example: NA
+                          fips_county_code:
+                            type: string
+                            maxLength: 3
+                            example: 097
+                          ftt_invoice_type_code:
+                            type: string
+                            maxLength: 2
+                            example: '01'
+                          gga_geographic_area:
+                            type: string
+                            maxLength: 4
+                            example: NA
+                          group_to_customer_id:
+                            type: integer
+                            minimum: 0
+                            maximum: 9999
+                            example: 125
+                          group_to_customer_report_description:
+                            type: string
+                            maxLength: 30
+                            example: Some great customer
+                          last_order_date:
+                            type: string
+                            maxLength: 10
+                            example: 09/21/2022
+                          last_pay_date:
+                            type: string
+                            maxLength: 10
+                            example: 10/31/2022
+                          last_sale_date:
+                            type: string
+                            maxLength: 10
+                            example: 09/20/2022
+                          loc_default_ship_location_code:
+                            type: string
+                            maxLength: 2
+                            example: WS
+                          loc_default_to_location_code:
+                            type: string
+                            maxLength: 2
+                            example: '01'
+                          main_contact_name:
+                            type: string
+                            maxLength: 30
+                            example: Joe Schmo
+                          mkt_market_code:
+                            type: string
+                            maxLength: 4
+                            example: NA
+                          mlc_mail_list_code:
+                            type: string
+                            maxLength: 2
+                            example: ND
+                          name:
+                            type: string
+                            maxLength: 30
+                            example: Some wholesale customer
+                          outstanding_order_count:
+                            type: integer
+                            minimum: 0
+                            maximum: 9999
+                            example: 5
+                          phone_number:
+                            type: string
+                            maxLength: 12
+                            example: 707-539-7990
+                          pickslip_pricing_flag:
+                            type: boolean
+                            example: false
+                          prs_pricing_class_code:
+                            type: string
+                            maxLength: 2
+                            example: NA
+                          resale_number:
+                            type: string
+                            maxLength: 18
+                            example: ' '
+                          revised_date:
+                            type: string
+                            maxLength: 10
+                            example: 12/20/2022
+                          rgn_region_code:
+                            type: string
+                            maxLength: 4
+                            example: NA
+                          sales_tax_status:
+                            title: SalesTaxStatusEnum
+                            x-tags:
+                              - Enumeration
+                            type: string
+                            maxLength: 18
+                            enum:
+                              - Sales Taxable
+                              - Sales Not Taxable
+                            example: Sales Taxable
+                          salesman_number:
+                            type: string
+                            maxLength: 4
+                            example: ' '
+                          sat_sales_type_code:
+                            type: string
+                            maxLength: 2
+                            example: WS
+                          scc_state_customer_category_code:
+                            type: string
+                            maxLength: 2
+                            example: NA
+                          sct_sales_category_code:
+                            type: string
+                            maxLength: 2
+                            example: NA
+                          setup_date:
+                            type: string
+                            maxLength: 10
+                            example: 01/01/1991
+                          ship_via:
+                            type: string
+                            maxLength: 20
+                            example: ' '
+                          sph_special_handling_code:
+                            type: string
+                            maxLength: 4
+                            example: NA
+                          state:
+                            type: string
+                            maxLength: 2
+                            example: CA
+                          stx_sales_tax_code:
+                            type: string
+                            maxLength: 2
+                            example: CA
+                          tax_exempt_reason:
+                            title: TaxExemptReasonEnum
+                            x-tags:
+                              - Enumeration
+                            type: string
+                            maxLength: 14
+                            enum:
+                              - In Bond
+                              - Export
+                              - Unknown
+                              - Export and Pay
+                              - Not Exempt
+                            example: Not Exempt
+                          zip_code:
+                            type: string
+                            maxLength: 10
+                            example: 95409
+                          orders:
+                            type: array
+                            items:
+                              title: V1GETOrderObject
+                              type: object
+                              properties:
+                                consumer_order_flag:
+                                  type: boolean
+                                  example: false
+                                creation_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 01/01/2020
+                                creation_time:
+                                  type: string
+                                  maxLength: 8
+                                  example: '11:35:48'
+                                creation_user_name:
+                                  type: string
+                                  maxLength: 8
+                                  example: JOE
+                                description1:
+                                  type: string
+                                  maxLength: 50
+                                  example: ' '
+                                description2:
+                                  type: string
+                                  maxLength: 50
+                                  example: ' '
+                                due_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 01/31/2020
+                                expected_ship_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 02/05/2020
+                                invoice_number:
+                                  type: string
+                                  maxLength: 10
+                                  example: '456789'
+                                invoice_print_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 01/15/2020
+                                last_mod_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 01/11/2020
+                                last_mod_time:
+                                  type: string
+                                  maxLength: 8
+                                  example: '12:00:00'
+                                last_mod_user:
+                                  type: string
+                                  maxLength: 8
+                                  example: JOE
+                                month_and_year_received:
+                                  type: string
+                                  maxLength: 7
+                                  example: 01/2020
+                                order_busy_status:
+                                  type: string
+                                  enum:
+                                    - Not Busy
+                                    - Busy for Order Entry
+                                    - Busy for Order Shipping
+                                    - Busy for Invoice Update
+                                  example: Not Busy
+                                order_confirmation_status:
+                                  type: string
+                                  enum:
+                                    - Needs Confirmed
+                                    - No Confirmation
+                                    - Confirmation Sent
+                                    - Confirmation Cancelled
+                                  example: Confirmation Sent
+                                order_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 01/01/2020
+                                order_additional_freight_amount:
+                                  type: number
+                                  minimum: -9999999.99
+                                  maximum: 9999999.99
+                                  example: 150
+                                order_consolidation_amount:
+                                  type: number
+                                  minimum: -9999999.99
+                                  maximum: 9999999.99
+                                  example: 0
+                                order_excise_tax_amount:
+                                  type: number
+                                  minimum: -9999999.99
+                                  maximum: 9999999.99
+                                  example: 150
+                                order_freight_amount:
+                                  type: number
+                                  minimum: -9999999.99
+                                  maximum: 9999999.99
+                                  example: 150.25
+                                order_id:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 11
+                                  example: 104-0
+                                order_status:
+                                  title: OrdStatusEnum
+                                  type: string
+                                  enum:
+                                    - 05-On_Hold
+                                    - 10-Received
+                                    - 15-Pickslip_Reprint_Pending
+                                    - 20-Pickslip_Printed
+                                    - 25-Bill_of_Lading_Reprint_Pending
+                                    - 30-Bill_of_Lading_Printed
+                                    - 35-Bill_of_Lading_Printed
+                                    - 50-Shipped
+                                    - 60-Invoiced
+                                    - 95-Cancelled
+                                  example: 10-Received
+                                order_type:
+                                  type: string
+                                  enum:
+                                    - Normal
+                                    - Correction
+                                    - Return
+                                  example: Normal
+                                otp_order_type_code:
+                                  type: string
+                                  maxLength: 10
+                                  example: Club
+                                pickslip_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 01/13/2020
+                                pickslip_print_count:
+                                  type: integer
+                                  minimum: 0
+                                  maximum: 9999
+                                pickslip_time:
+                                  type: string
+                                  maxLength: 8
+                                  example: '13:44:50'
+                                purchase_order_number:
+                                  type: string
+                                  maxLength: 10
+                                  example: '123456'
+                                refer_to_invoice_number:
+                                  type: integer
+                                  minimum: 0
+                                  maximum: 9999999999
+                                report_to_state_flag:
+                                  type: boolean
+                                  example: true
+                                shipment_advisement_status:
+                                  type: string
+                                  enum:
+                                    - Shipment Advisement Needed
+                                    - No Shipment Advisement
+                                    - Shipment Advisement Sent
+                                  example: No Shipment Advisement
+                                ship_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 01/15/2020
+                                ship_user_name:
+                                  type: string
+                                  maxLength: 8
+                                  example: JOE
+                                ship_via_text:
+                                  type: string
+                                  maxLength: 30
+                                  example: Via Ray's Trucking
+                                ship_with_reference_number:
+                                  type: string
+                                  maxLength: 20
+                                  example: A56498
+                                status_date:
+                                  type: string
+                                  maxLength: 10
+                                  example: 01/12/2020
+                                total_weight_in_pounds:
+                                  type: number
+                                  minimum: 0
+                                  maximum: 9999999.99
+                                  example: 3562.1
+                                whole_cases_ordered:
+                                  type: number
+                                  minimum: -9999999.99
+                                  maximum: 9999999.99
+                                  example: 112
+                                whole_cases_shipped:
+                                  type: number
+                                  minimum: -9999999.99
+                                  maximum: 9999999.99
+                                  example: 112
+                                whs_warehouse_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: 8W
+                                winery_reference_number:
+                                  type: string
+                                  maxLength: 20
+                                  example: A56498
+                                win_winery_code:
+                                  type: string
+                                  maxLength: 4
+                                  example: AV
+                          contacts:
+                            type: array
+                            items:
+                              title: V1GETContactObject
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                  minimum: 1
+                                  maximum: 4
+                                  example: 1
+                                contact_type:
+                                  title: ContactTypeEnum
+                                  x-tags:
+                                    - Enumeration
+                                  type: string
+                                  maxLength: 24
+                                  enum:
+                                    - Accounts Receivable
+                                    - Invoice
+                                    - Wholesale Order
+                                    - Direct-To-Consumer Order
+                                contact_name:
+                                  type: string
+                                  maxLength: 30
+                                  example: Karen at the co-op
+                                address_1:
+                                  type: string
+                                  maxLength: 30
+                                  example: 4415 Sonoma Highway
+                                address_2:
+                                  type: string
+                                  maxLength: 30
+                                  example: ' '
+                                city:
+                                  type: string
+                                  maxLength: 24
+                                  example: Santa Rosa
+                                state:
+                                  type: string
+                                  maxLength: 2
+                                  example: CA
+                                zipcode:
+                                  type: string
+                                  maxLength: 10
+                                  example: '95409'
+                                phone:
+                                  type: string
+                                  maxLength: 16
+                                  example: 707-539-7990
+                                email:
+                                  type: string
+                                  maxLength: 256
+                                  example: orders@amssoftware.com;customerservice@amssoftware.com
+                                ocd_distribution_list_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: WB
+    200V1SuccessfulOrdersArrayGet:
+      description: Ok - The get of the orders array for a ship_customer was successful.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ams_api_response:
+                type: object
+                properties:
+                  error_state:
+                    type: boolean
+                    example: false
+                  endpoint_response:
+                    type: object
+                    properties:
+                      orders:
+                        type: array
+                        items:
+                          title: V1GETOrderObject
+                          type: object
+                          properties:
+                            consumer_order_flag:
+                              type: boolean
+                              example: false
+                            creation_date:
+                              type: string
+                              maxLength: 10
+                              example: 01/01/2020
+                            creation_time:
+                              type: string
+                              maxLength: 8
+                              example: '11:35:48'
+                            creation_user_name:
+                              type: string
+                              maxLength: 8
+                              example: JOE
+                            description1:
+                              type: string
+                              maxLength: 50
+                              example: ' '
+                            description2:
+                              type: string
+                              maxLength: 50
+                              example: ' '
+                            due_date:
+                              type: string
+                              maxLength: 10
+                              example: 01/31/2020
+                            expected_ship_date:
+                              type: string
+                              maxLength: 10
+                              example: 02/05/2020
+                            invoice_number:
+                              type: string
+                              maxLength: 10
+                              example: '456789'
+                            invoice_print_date:
+                              type: string
+                              maxLength: 10
+                              example: 01/15/2020
+                            last_mod_date:
+                              type: string
+                              maxLength: 10
+                              example: 01/11/2020
+                            last_mod_time:
+                              type: string
+                              maxLength: 8
+                              example: '12:00:00'
+                            last_mod_user:
+                              type: string
+                              maxLength: 8
+                              example: JOE
+                            month_and_year_received:
+                              type: string
+                              maxLength: 7
+                              example: 01/2020
+                            order_busy_status:
+                              type: string
+                              enum:
+                                - Not Busy
+                                - Busy for Order Entry
+                                - Busy for Order Shipping
+                                - Busy for Invoice Update
+                              example: Not Busy
+                            order_confirmation_status:
+                              type: string
+                              enum:
+                                - Needs Confirmed
+                                - No Confirmation
+                                - Confirmation Sent
+                                - Confirmation Cancelled
+                              example: Confirmation Sent
+                            order_date:
+                              type: string
+                              maxLength: 10
+                              example: 01/01/2020
+                            order_additional_freight_amount:
+                              type: number
+                              minimum: -9999999.99
+                              maximum: 9999999.99
+                              example: 150
+                            order_consolidation_amount:
+                              type: number
+                              minimum: -9999999.99
+                              maximum: 9999999.99
+                              example: 0
+                            order_excise_tax_amount:
+                              type: number
+                              minimum: -9999999.99
+                              maximum: 9999999.99
+                              example: 150
+                            order_freight_amount:
+                              type: number
+                              minimum: -9999999.99
+                              maximum: 9999999.99
+                              example: 150.25
+                            order_id:
+                              type: string
+                              minLength: 1
+                              maxLength: 11
+                              example: 104-0
+                            order_status:
+                              title: OrdStatusEnum
+                              type: string
+                              enum:
+                                - 05-On_Hold
+                                - 10-Received
+                                - 15-Pickslip_Reprint_Pending
+                                - 20-Pickslip_Printed
+                                - 25-Bill_of_Lading_Reprint_Pending
+                                - 30-Bill_of_Lading_Printed
+                                - 35-Bill_of_Lading_Printed
+                                - 50-Shipped
+                                - 60-Invoiced
+                                - 95-Cancelled
+                              example: 10-Received
+                            order_type:
+                              type: string
+                              enum:
+                                - Normal
+                                - Correction
+                                - Return
+                              example: Normal
+                            otp_order_type_code:
+                              type: string
+                              maxLength: 10
+                              example: Club
+                            pickslip_date:
+                              type: string
+                              maxLength: 10
+                              example: 01/13/2020
+                            pickslip_print_count:
+                              type: integer
+                              minimum: 0
+                              maximum: 9999
+                            pickslip_time:
+                              type: string
+                              maxLength: 8
+                              example: '13:44:50'
+                            purchase_order_number:
+                              type: string
+                              maxLength: 10
+                              example: '123456'
+                            refer_to_invoice_number:
+                              type: integer
+                              minimum: 0
+                              maximum: 9999999999
+                            report_to_state_flag:
+                              type: boolean
+                              example: true
+                            shipment_advisement_status:
+                              type: string
+                              enum:
+                                - Shipment Advisement Needed
+                                - No Shipment Advisement
+                                - Shipment Advisement Sent
+                              example: No Shipment Advisement
+                            ship_date:
+                              type: string
+                              maxLength: 10
+                              example: 01/15/2020
+                            ship_user_name:
+                              type: string
+                              maxLength: 8
+                              example: JOE
+                            ship_via_text:
+                              type: string
+                              maxLength: 30
+                              example: Via Ray's Trucking
+                            ship_with_reference_number:
+                              type: string
+                              maxLength: 20
+                              example: A56498
+                            status_date:
+                              type: string
+                              maxLength: 10
+                              example: 01/12/2020
+                            total_weight_in_pounds:
+                              type: number
+                              minimum: 0
+                              maximum: 9999999.99
+                              example: 3562.1
+                            whole_cases_ordered:
+                              type: number
+                              minimum: -9999999.99
+                              maximum: 9999999.99
+                              example: 112
+                            whole_cases_shipped:
+                              type: number
+                              minimum: -9999999.99
+                              maximum: 9999999.99
+                              example: 112
+                            whs_warehouse_code:
+                              type: string
+                              maxLength: 2
+                              example: 8W
+                            winery_reference_number:
+                              type: string
+                              maxLength: 20
+                              example: A56498
+                            win_winery_code:
+                              type: string
+                              maxLength: 4
+                              example: AV
+    200V1SuccessfulContactsArrayGet:
+      description: Ok - The get of the contacts array for a customer was successful.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ams_api_response:
+                type: object
+                properties:
+                  error_state:
+                    type: boolean
+                    example: false
+                  endpoint_response:
+                    type: object
+                    properties:
+                      contacts:
+                        type: array
+                        items:
+                          title: V1GETContactObject
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 4
+                              example: 1
+                            contact_type:
+                              title: ContactTypeEnum
+                              x-tags:
+                                - Enumeration
+                              type: string
+                              maxLength: 24
+                              enum:
+                                - Accounts Receivable
+                                - Invoice
+                                - Wholesale Order
+                                - Direct-To-Consumer Order
+                            contact_name:
+                              type: string
+                              maxLength: 30
+                              example: Karen at the co-op
+                            address_1:
+                              type: string
+                              maxLength: 30
+                              example: 4415 Sonoma Highway
+                            address_2:
+                              type: string
+                              maxLength: 30
+                              example: ' '
+                            city:
+                              type: string
+                              maxLength: 24
+                              example: Santa Rosa
+                            state:
+                              type: string
+                              maxLength: 2
+                              example: CA
+                            zipcode:
+                              type: string
+                              maxLength: 10
+                              example: '95409'
+                            phone:
+                              type: string
+                              maxLength: 16
+                              example: 707-539-7990
+                            email:
+                              type: string
+                              maxLength: 256
+                              example: orders@amssoftware.com;customerservice@amssoftware.com
+                            ocd_distribution_list_code:
+                              type: string
+                              maxLength: 2
+                              example: WB
+    400BadParmsGetResponse:
+      description: The query parameters used in the query of the products endpoint were invalid.
+      content:
+        application/json:
+          schema:
+            title: Bad Request - Invalid Query Parameters Response
+            x-tags:
+              - FailureResponse
+            type: object
+            properties:
+              ams_api_response:
+                type: object
+                properties:
+                  error_state:
+                    type: boolean
+                    example: true
+                  error_msg:
+                    title: HandlerHttpErrorMessage
+                    x-tags:
+                      - Message
+                    type: string
+                    example: The API handler indicated an error condition via the HTTP return code.
+                  endpoint_response:
+                    type: object
+                    properties:
+                      potential_query_parameters:
+                        title: PotentialQueryParms
+                        type: array
+                        minItems: 1
+                        items:
+                          anyOf:
+                            - title: QueryParm1Object
+                              type: object
+                              properties:
+                                parameter_name:
+                                  type: string
+                                  example: FIXED_STRING_PARM
+                                parameter_type:
+                                  type: string
+                                  example: 'Standard parameter (fixed values, see further messaging in the parameter_notes)'
+                                parameter_notes:
+                                  type: string
+                                  example: This fixed string parm represents a parameter that must have one of a discrete number of possible values. This message will contain information about the possible values.
+                            - title: QueryParm2Object
+                              type: object
+                              properties:
+                                parameter_name:
+                                  type: string
+                                  example: STRING_SEARCH_PARM
+                                parameter_type:
+                                  type: string
+                                  example: String search parameter (generally contains type text search)
+                                parameter_notes:
+                                  type: string
+                                  example: 'This string_search_parm represents a parameter the will use some form of text matching to limit results. Generally, the text search methodology will be of the contains type, however, the returned notes will specify the type of search methodology.'
+                            - title: QueryParm3Object
+                              type: object
+                              properties:
+                                parameter_name:
+                                  type: string
+                                  example: NUMERIC_PARM
+                                parameter_type:
+                                  type: string
+                                  example: Numeric parameter
+                                parameter_notes:
+                                  type: string
+                                  example: This numeric_parm represents a parameter that will be compared to some numeric property of an API resource. There are three formats form numeric values and each indicates a different type of numeric comparison. >999 represents a greater than search. <999 represents a less than search. 999-1000 represents an inclusive range search.
+                            - title: QueryParm4Object
+                              type: object
+                              properties:
+                                parameter_name:
+                                  type: string
+                                  example: DATE_PARM
+                                parameter_type:
+                                  type: string
+                                  example: Date parameter
+                                parameter_notes:
+                                  type: string
+                                  example: This date_parm represents a parameter that will be compared to some date property of an API resource. There are three formats form date values and each indicates a different type of date comparison. >MMDDYY represents a greater than date search. <MMDDYY represents a less than date search. MMDDYY-MMDDYY represents an inclusive date range search.
+    401UnauthorizedResponse:
+      description: The authorization GUID used in the request was invalid/expired or the authorization header itself was missing.
+      content:
+        application/json:
+          schema:
+            title: Unauthorized - Invalid/Missing Authorization GUID Response
+            x-tags:
+              - FailureResponse
+            type: object
+            properties:
+              ams_api_response:
+                type: object
+                properties:
+                  error_state:
+                    type: boolean
+                    example: true
+                  error_msg:
+                    type: string
+                    example: Invalid authorization GUID.
+    403ForbiddenResponse:
+      description: The API User does not have access to the requested resource.
+      content:
+        application/json:
+          schema:
+            title: Forbidden - Access Not Permitted Response
+            x-tags:
+              - FailureResponse
+            type: object
+            properties:
+              ams_api_response:
+                type: object
+                required:
+                  - error_state
+                  - error_msg
+                properties:
+                  error_state:
+                    type: boolean
+                    example: true
+                  error_msg:
+                    oneOf:
+                      - title: HandlerHttpErrorMessage
+                        x-tags:
+                          - Message
+                        type: string
+                        example: The API handler indicated an error condition via the HTTP return code.
+                      - title: InvalidImpersonationGuidMessage
+                        x-tags:
+                          - Message
+                        type: string
+                        example: Invalid Impersonation Guid
+                  endpoint_response:
+                    type: object
+                    properties:
+                      error_msg:
+                        oneOf:
+                          - title: NoApiAccessMessage
+                            x-tags:
+                              - Message
+                            type: string
+                            example: User does not have access to the called method on the called resource.
+                          - title: AmsUserImpersonationFailureMessage
+                            x-tags:
+                              - Message
+                            type: string
+                            example: User does not have access to the GET method on the dtc_orders API resource
+                          - title: DtcCustImpersonationFailureMessage
+                            x-tags:
+                              - Message
+                            type: string
+                            example: 'When impersonating a DTC customer, only actions on that customer are allowed'
+    404NotFoundResponse:
+      description: The requested API resource does not exist.
+      content:
+        application/json:
+          schema:
+            title: Not Found - Resource Does Not Exist Response
+            x-tags:
+              - FailureResponse
+            type: object
+            properties:
+              ams_api_response:
+                type: object
+                properties:
+                  error_state:
+                    type: boolean
+                    example: true
+                  error_msg:
+                    title: HandlerHttpErrorMessage
+                    x-tags:
+                      - Message
+                    type: string
+                    example: The API handler indicated an error condition via the HTTP return code.
+                  endpoint_response:
+                    type: object
+                    properties:
+                      error_msg:
+                        title: ResourceNotFoundMessage
+                        x-tags:
+                          - Message
+                        type: string
+                        example: API resource with provided ID not found.
