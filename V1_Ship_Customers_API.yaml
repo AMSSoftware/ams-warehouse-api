@@ -345,7 +345,7 @@ paths:
                                     zip_code:
                                       type: string
                                       maxLength: 10
-                                      example: 95409
+                                      example: '95409'
                                     orders:
                                       type: array
                                       items:
@@ -577,6 +577,7 @@ paths:
                                               - Invoice
                                               - Wholesale Order
                                               - Direct-To-Consumer Order
+                                            example: Invoice
                                           contact_name:
                                             type: string
                                             maxLength: 30
@@ -1070,7 +1071,7 @@ paths:
                               zip_code:
                                 type: string
                                 maxLength: 10
-                                example: 95409
+                                example: '95409'
                               orders:
                                 type: array
                                 items:
@@ -1302,6 +1303,7 @@ paths:
                                         - Invoice
                                         - Wholesale Order
                                         - Direct-To-Consumer Order
+                                      example: Invoice
                                     contact_name:
                                       type: string
                                       maxLength: 30
@@ -1833,6 +1835,7 @@ paths:
                                     - Invoice
                                     - Wholesale Order
                                     - Direct-To-Consumer Order
+                                  example: Invoice
                                 contact_name:
                                   type: string
                                   maxLength: 30
@@ -2296,7 +2299,7 @@ components:
                                 zip_code:
                                   type: string
                                   maxLength: 10
-                                  example: 95409
+                                  example: '95409'
                                 orders:
                                   type: array
                                   items:
@@ -2528,6 +2531,7 @@ components:
                                           - Invoice
                                           - Wholesale Order
                                           - Direct-To-Consumer Order
+                                        example: Invoice
                                       contact_name:
                                         type: string
                                         maxLength: 30
@@ -2857,7 +2861,7 @@ components:
                           zip_code:
                             type: string
                             maxLength: 10
-                            example: 95409
+                            example: '95409'
                           orders:
                             type: array
                             items:
@@ -3089,6 +3093,7 @@ components:
                                     - Invoice
                                     - Wholesale Order
                                     - Direct-To-Consumer Order
+                                  example: Invoice
                                 contact_name:
                                   type: string
                                   maxLength: 30
@@ -3388,6 +3393,7 @@ components:
                                 - Invoice
                                 - Wholesale Order
                                 - Direct-To-Consumer Order
+                              example: Invoice
                             contact_name:
                               type: string
                               maxLength: 30
