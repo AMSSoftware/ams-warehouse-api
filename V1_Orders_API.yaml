@@ -13,6 +13,7 @@ info:
     <li>2020-08-07 - KAS - Finished tweaking property names as the design is transferred to the Excel sheet.</li>
     <li>2020-11-29 - KAS - Factor out common components into the AMSComponents domain.</li>
     <li>2021-09-15 - KAS - Clean up, re-organize a bit, and import into Stoplight Studio/ReadMe. This involves the introduction of 'model' files, rather than the 'domains' that SwaggerHub allows for.</li>
+    <li>2023-04-25 - KAS - Adjust the maximum lengths for a couple of items to support code translations.</li>
     </ul>
   contact:
     name: Helpdesk API Support
@@ -1267,10 +1268,10 @@ paths:
                   maxLength: 24
                   example: Santa Rosa
                 ship_customer_id:
-                  type: number
-                  minimum: 1
-                  maximum: 9999
-                  example: 123
+                  type: string
+                  minLength: 4
+                  maxLength: 24
+                  example: '9999'
                 ship_name:
                   type: string
                   maxLength: 30
@@ -1434,7 +1435,7 @@ paths:
                       example: DV-HAPBD1
                     ols_level_of_service_code:
                       type: string
-                      maxLength: 10
+                      maxLength: 20
                       example: NEXTDAYAIR
                     opk_default_package_code:
                       type: string
@@ -1535,7 +1536,7 @@ paths:
                       product_id:
                         type: string
                         minLength: 5
-                        maxLength: 20
+                        maxLength: 24
                         example: BNCH01
                       purchase_price:
                         type: number
@@ -5146,10 +5147,10 @@ components:
                 maxLength: 24
                 example: Santa Rosa
               ship_customer_id:
-                type: number
-                minimum: 1
-                maximum: 9999
-                example: 123
+                type: string
+                minLength: 4
+                maxLength: 24
+                example: '9999'
               ship_name:
                 type: string
                 maxLength: 30
@@ -5313,7 +5314,7 @@ components:
                     example: DV-HAPBD1
                   ols_level_of_service_code:
                     type: string
-                    maxLength: 10
+                    maxLength: 20
                     example: NEXTDAYAIR
                   opk_default_package_code:
                     type: string
@@ -5414,7 +5415,7 @@ components:
                     product_id:
                       type: string
                       minLength: 5
-                      maxLength: 20
+                      maxLength: 24
                       example: BNCH01
                     purchase_price:
                       type: number
@@ -9127,10 +9128,10 @@ components:
           maxLength: 24
           example: Santa Rosa
         ship_customer_id:
-          type: number
-          minimum: 1
-          maximum: 9999
-          example: 123
+          type: string
+          minLength: 4
+          maxLength: 24
+          example: '9999'
         ship_name:
           type: string
           maxLength: 30
@@ -9294,7 +9295,7 @@ components:
               example: DV-HAPBD1
             ols_level_of_service_code:
               type: string
-              maxLength: 10
+              maxLength: 20
               example: NEXTDAYAIR
             opk_default_package_code:
               type: string
@@ -9395,7 +9396,7 @@ components:
               product_id:
                 type: string
                 minLength: 5
-                maxLength: 20
+                maxLength: 24
                 example: BNCH01
               purchase_price:
                 type: number
@@ -9609,7 +9610,7 @@ components:
           example: DV-HAPBD1
         ols_level_of_service_code:
           type: string
-          maxLength: 10
+          maxLength: 20
           example: NEXTDAYAIR
         opk_default_package_code:
           type: string
@@ -9710,7 +9711,7 @@ components:
           product_id:
             type: string
             minLength: 5
-            maxLength: 20
+            maxLength: 24
             example: BNCH01
           purchase_price:
             type: number
@@ -9782,7 +9783,7 @@ components:
         product_id:
           type: string
           minLength: 5
-          maxLength: 20
+          maxLength: 24
           example: BNCH01
         purchase_price:
           type: number
