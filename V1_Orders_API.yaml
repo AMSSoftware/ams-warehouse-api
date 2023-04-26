@@ -1313,15 +1313,6 @@ paths:
                   maxItems: 99
                   items:
                     type: object
-                    required:
-                      - long_text
-                      - oec_comment_code
-                      - print_on_bill_of_lading_switch
-                      - print_on_confirmation_switch
-                      - print_on_invoice_switch
-                      - print_on_pick_switch
-                      - text1
-                      - text2
                     properties:
                       long_text:
                         type: string
@@ -1481,8 +1472,6 @@ paths:
                   maxItems: 3
                   items:
                     type: object
-                    required:
-                      - instruction
                     properties:
                       instruction:
                         type: string
@@ -5192,15 +5181,6 @@ components:
                 maxItems: 99
                 items:
                   type: object
-                  required:
-                    - long_text
-                    - oec_comment_code
-                    - print_on_bill_of_lading_switch
-                    - print_on_confirmation_switch
-                    - print_on_invoice_switch
-                    - print_on_pick_switch
-                    - text1
-                    - text2
                   properties:
                     long_text:
                       type: string
@@ -5360,8 +5340,6 @@ components:
                 maxItems: 3
                 items:
                   type: object
-                  required:
-                    - instruction
                   properties:
                     instruction:
                       type: string
@@ -9173,15 +9151,6 @@ components:
           maxItems: 99
           items:
             type: object
-            required:
-              - long_text
-              - oec_comment_code
-              - print_on_bill_of_lading_switch
-              - print_on_confirmation_switch
-              - print_on_invoice_switch
-              - print_on_pick_switch
-              - text1
-              - text2
             properties:
               long_text:
                 type: string
@@ -9341,8 +9310,6 @@ components:
           maxItems: 3
           items:
             type: object
-            required:
-              - instruction
             properties:
               instruction:
                 type: string
@@ -9431,15 +9398,6 @@ components:
       maxItems: 99
       items:
         type: object
-        required:
-          - long_text
-          - oec_comment_code
-          - print_on_bill_of_lading_switch
-          - print_on_confirmation_switch
-          - print_on_invoice_switch
-          - print_on_pick_switch
-          - text1
-          - text2
         properties:
           long_text:
             type: string
@@ -9488,15 +9446,6 @@ components:
             example: ' '
     V1WarehousePostCommentObject:
       type: object
-      required:
-        - long_text
-        - oec_comment_code
-        - print_on_bill_of_lading_switch
-        - print_on_confirmation_switch
-        - print_on_invoice_switch
-        - print_on_pick_switch
-        - text1
-        - text2
       properties:
         long_text:
           type: string
@@ -9656,8 +9605,6 @@ components:
       maxItems: 3
       items:
         type: object
-        required:
-          - instruction
         properties:
           instruction:
             type: string
