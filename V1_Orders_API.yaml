@@ -1305,6 +1305,7 @@ paths:
                   example: AV
                 win_winery_code:
                   type: string
+                  minLength: 2
                   maxLength: 4
                   example: AV
                 comment_lines:
@@ -5173,6 +5174,7 @@ components:
                 example: AV
               win_winery_code:
                 type: string
+                minLength: 2
                 maxLength: 4
                 example: AV
               comment_lines:
@@ -9143,6 +9145,7 @@ components:
           example: AV
         win_winery_code:
           type: string
+          minLength: 2
           maxLength: 4
           example: AV
         comment_lines:
