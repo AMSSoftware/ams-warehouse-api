@@ -391,18 +391,6 @@ paths:
                                             type: string
                                             maxLength: 10
                                             example: 01/15/2020
-                                          last_mod_date:
-                                            type: string
-                                            maxLength: 10
-                                            example: 01/11/2020
-                                          last_mod_time:
-                                            type: string
-                                            maxLength: 8
-                                            example: '12:00:00'
-                                          last_mod_user:
-                                            type: string
-                                            maxLength: 8
-                                            example: JOE
                                           month_and_year_received:
                                             type: string
                                             maxLength: 7
@@ -1117,18 +1105,6 @@ paths:
                                       type: string
                                       maxLength: 10
                                       example: 01/15/2020
-                                    last_mod_date:
-                                      type: string
-                                      maxLength: 10
-                                      example: 01/11/2020
-                                    last_mod_time:
-                                      type: string
-                                      maxLength: 8
-                                      example: '12:00:00'
-                                    last_mod_user:
-                                      type: string
-                                      maxLength: 8
-                                      example: JOE
                                     month_and_year_received:
                                       type: string
                                       maxLength: 7
@@ -1517,18 +1493,6 @@ paths:
                                   type: string
                                   maxLength: 10
                                   example: 01/15/2020
-                                last_mod_date:
-                                  type: string
-                                  maxLength: 10
-                                  example: 01/11/2020
-                                last_mod_time:
-                                  type: string
-                                  maxLength: 8
-                                  example: '12:00:00'
-                                last_mod_user:
-                                  type: string
-                                  maxLength: 8
-                                  example: JOE
                                 month_and_year_received:
                                   type: string
                                   maxLength: 7
@@ -2345,18 +2309,6 @@ components:
                                         type: string
                                         maxLength: 10
                                         example: 01/15/2020
-                                      last_mod_date:
-                                        type: string
-                                        maxLength: 10
-                                        example: 01/11/2020
-                                      last_mod_time:
-                                        type: string
-                                        maxLength: 8
-                                        example: '12:00:00'
-                                      last_mod_user:
-                                        type: string
-                                        maxLength: 8
-                                        example: JOE
                                       month_and_year_received:
                                         type: string
                                         maxLength: 7
@@ -2907,18 +2859,6 @@ components:
                                   type: string
                                   maxLength: 10
                                   example: 01/15/2020
-                                last_mod_date:
-                                  type: string
-                                  maxLength: 10
-                                  example: 01/11/2020
-                                last_mod_time:
-                                  type: string
-                                  maxLength: 8
-                                  example: '12:00:00'
-                                last_mod_user:
-                                  type: string
-                                  maxLength: 8
-                                  example: JOE
                                 month_and_year_received:
                                   type: string
                                   maxLength: 7
@@ -3191,18 +3131,6 @@ components:
                               type: string
                               maxLength: 10
                               example: 01/15/2020
-                            last_mod_date:
-                              type: string
-                              maxLength: 10
-                              example: 01/11/2020
-                            last_mod_time:
-                              type: string
-                              maxLength: 8
-                              example: '12:00:00'
-                            last_mod_user:
-                              type: string
-                              maxLength: 8
-                              example: JOE
                             month_and_year_received:
                               type: string
                               maxLength: 7
