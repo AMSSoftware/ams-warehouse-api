@@ -520,10 +520,6 @@ paths:
                                             type: string
                                             maxLength: 30
                                             example: Via Ray's Trucking
-                                          ship_with_reference_number:
-                                            type: string
-                                            maxLength: 20
-                                            example: A56498
                                           status_date:
                                             type: string
                                             maxLength: 10
@@ -1246,10 +1242,6 @@ paths:
                                       type: string
                                       maxLength: 30
                                       example: Via Ray's Trucking
-                                    ship_with_reference_number:
-                                      type: string
-                                      maxLength: 20
-                                      example: A56498
                                     status_date:
                                       type: string
                                       maxLength: 10
@@ -1646,10 +1638,6 @@ paths:
                                   type: string
                                   maxLength: 30
                                   example: Via Ray's Trucking
-                                ship_with_reference_number:
-                                  type: string
-                                  maxLength: 20
-                                  example: A56498
                                 status_date:
                                   type: string
                                   maxLength: 10
@@ -2474,10 +2462,6 @@ components:
                                         type: string
                                         maxLength: 30
                                         example: Via Ray's Trucking
-                                      ship_with_reference_number:
-                                        type: string
-                                        maxLength: 20
-                                        example: A56498
                                       status_date:
                                         type: string
                                         maxLength: 10
@@ -3036,10 +3020,6 @@ components:
                                   type: string
                                   maxLength: 30
                                   example: Via Ray's Trucking
-                                ship_with_reference_number:
-                                  type: string
-                                  maxLength: 20
-                                  example: A56498
                                 status_date:
                                   type: string
                                   maxLength: 10
@@ -3320,10 +3300,6 @@ components:
                               type: string
                               maxLength: 30
                               example: Via Ray's Trucking
-                            ship_with_reference_number:
-                              type: string
-                              maxLength: 20
-                              example: A56498
                             status_date:
                               type: string
                               maxLength: 10
