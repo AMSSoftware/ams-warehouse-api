@@ -43,6 +43,24 @@ paths:
           required: false
           schema:
             type: string
+        - name: cust_name
+          in: query
+          description: Query parameter that will filter results by the ship_customer name. The comparison type will be using the 'contains' strategy.
+          required: false
+          schema:
+            type: string
+        - name: active_status
+          in: query
+          description: 'Query parameter that will filter results by the active_status of the ship_customer. Comparison type will be exact matching. Values are ''ACTIVE'' for Active Customer, ''HIGH'' for High Activity Customer, and ''INACTIVE'' for Inactive Customer.'
+          required: false
+          schema:
+            type: string
+        - name: bill_cust_name
+          in: query
+          description: Query parameter that will filter results by the name of the bill-to customer attached to the ship_customer. The comparison will be done using the 'contains' strategy.
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: Ok - The query of the warehouse ship_customers resource was successful.
@@ -99,7 +117,7 @@ paths:
                                       type: string
                                       maxLength: 2
                                       example: NA
-                                    ars_statement_code:
+                                    ars_ar_statement_code:
                                       type: string
                                       maxLength: 2
                                       example: NA
@@ -112,6 +130,10 @@ paths:
                                       minimum: 0
                                       maximum: 9999
                                       example: 0
+                                    bill_to_customer_report_description:
+                                      type: string
+                                      maxLength: 30
+                                      example: Some great customer
                                     broker_number:
                                       type: string
                                       maxLength: 4
@@ -133,6 +155,14 @@ paths:
                                       type: string
                                       maxLength: 30
                                       example: Some great customer
+                                    cou_fips_county_code:
+                                      type: string
+                                      maxLength: 3
+                                      example: 097
+                                    cst_cust_status_code:
+                                      type: string
+                                      maxLength: 4
+                                      example: COD
                                     ctr_country_code:
                                       type: string
                                       maxLength: 4
@@ -150,7 +180,7 @@ paths:
                                       type: string
                                       maxLength: 30
                                       example: Some great customer
-                                    dac_da_class_code:
+                                    dac_depletion_allowance_class_code:
                                       type: string
                                       maxLength: 4
                                       example: ' '
@@ -166,17 +196,6 @@ paths:
                                       type: string
                                       maxLength: 30
                                       example: Haha! Thank you!
-                                    delivery_status:
-                                      title: DeliveryStatusEnum
-                                      x-tags:
-                                        - Enumeration
-                                      type: string
-                                      maxLength: 24
-                                      enum:
-                                        - Check On Delivery
-                                        - Check Before Delivery
-                                        - On Hold
-                                      example: Check On Delivery
                                     deplete_to_customer_id:
                                       type: integer
                                       minimum: 0
@@ -194,14 +213,14 @@ paths:
                                       type: string
                                       maxLength: 2
                                       example: '10'
+                                    ete_tax_exempt_code:
+                                      type: string
+                                      maxLength: 2
+                                      example: 'NO'
                                     fgh_freight_code:
                                       type: string
                                       maxLength: 2
                                       example: NA
-                                    fips_county_code:
-                                      type: string
-                                      maxLength: 3
-                                      example: 097
                                     ftt_invoice_type_code:
                                       type: string
                                       maxLength: 2
@@ -283,16 +302,6 @@ paths:
                                       type: string
                                       maxLength: 4
                                       example: NA
-                                    sales_tax_status:
-                                      title: SalesTaxStatusEnum
-                                      x-tags:
-                                        - Enumeration
-                                      type: string
-                                      maxLength: 18
-                                      enum:
-                                        - Sales Taxable
-                                        - Sales Not Taxable
-                                      example: Sales Taxable
                                     salesman_number:
                                       type: string
                                       maxLength: 4
@@ -313,7 +322,7 @@ paths:
                                       type: string
                                       maxLength: 10
                                       example: 01/01/1991
-                                    ship_via:
+                                    ship_via_text:
                                       type: string
                                       maxLength: 20
                                       example: ' '
@@ -329,19 +338,6 @@ paths:
                                       type: string
                                       maxLength: 2
                                       example: CA
-                                    tax_exempt_reason:
-                                      title: TaxExemptReasonEnum
-                                      x-tags:
-                                        - Enumeration
-                                      type: string
-                                      maxLength: 14
-                                      enum:
-                                        - In Bond
-                                        - Export
-                                        - Unknown
-                                        - Export and Pay
-                                        - Not Exempt
-                                      example: Not Exempt
                                     zip_code:
                                       type: string
                                       maxLength: 10
@@ -399,7 +395,7 @@ paths:
                                             type: string
                                             maxLength: 8
                                             example: '12:00:00'
-                                          last_mod_user:
+                                          last_mod_user_name:
                                             type: string
                                             maxLength: 8
                                             example: JOE
@@ -594,11 +590,11 @@ paths:
                                             type: string
                                             maxLength: 2
                                             example: CA
-                                          zipcode:
+                                          zip_code:
                                             type: string
                                             maxLength: 10
                                             example: '95409'
-                                          phone:
+                                          phone_number:
                                             type: string
                                             maxLength: 16
                                             example: 707-539-7990
@@ -606,10 +602,6 @@ paths:
                                             type: string
                                             maxLength: 256
                                             example: orders@amssoftware.com;customerservice@amssoftware.com
-                                          ocd_distribution_list_code:
-                                            type: string
-                                            maxLength: 2
-                                            example: WB
         '400':
           description: The query parameters used in the query of the products endpoint were invalid.
           content:
@@ -821,7 +813,7 @@ paths:
                                 type: string
                                 maxLength: 2
                                 example: NA
-                              ars_statement_code:
+                              ars_ar_statement_code:
                                 type: string
                                 maxLength: 2
                                 example: NA
@@ -834,6 +826,10 @@ paths:
                                 minimum: 0
                                 maximum: 9999
                                 example: 0
+                              bill_to_customer_report_description:
+                                type: string
+                                maxLength: 30
+                                example: Some great customer
                               broker_number:
                                 type: string
                                 maxLength: 4
@@ -855,6 +851,14 @@ paths:
                                 type: string
                                 maxLength: 30
                                 example: Some great customer
+                              cou_fips_county_code:
+                                type: string
+                                maxLength: 3
+                                example: 097
+                              cst_cust_status_code:
+                                type: string
+                                maxLength: 4
+                                example: COD
                               ctr_country_code:
                                 type: string
                                 maxLength: 4
@@ -872,7 +876,7 @@ paths:
                                 type: string
                                 maxLength: 30
                                 example: Some great customer
-                              dac_da_class_code:
+                              dac_depletion_allowance_class_code:
                                 type: string
                                 maxLength: 4
                                 example: ' '
@@ -888,17 +892,6 @@ paths:
                                 type: string
                                 maxLength: 30
                                 example: Haha! Thank you!
-                              delivery_status:
-                                title: DeliveryStatusEnum
-                                x-tags:
-                                  - Enumeration
-                                type: string
-                                maxLength: 24
-                                enum:
-                                  - Check On Delivery
-                                  - Check Before Delivery
-                                  - On Hold
-                                example: Check On Delivery
                               deplete_to_customer_id:
                                 type: integer
                                 minimum: 0
@@ -916,14 +909,14 @@ paths:
                                 type: string
                                 maxLength: 2
                                 example: '10'
+                              ete_tax_exempt_code:
+                                type: string
+                                maxLength: 2
+                                example: 'NO'
                               fgh_freight_code:
                                 type: string
                                 maxLength: 2
                                 example: NA
-                              fips_county_code:
-                                type: string
-                                maxLength: 3
-                                example: 097
                               ftt_invoice_type_code:
                                 type: string
                                 maxLength: 2
@@ -1005,16 +998,6 @@ paths:
                                 type: string
                                 maxLength: 4
                                 example: NA
-                              sales_tax_status:
-                                title: SalesTaxStatusEnum
-                                x-tags:
-                                  - Enumeration
-                                type: string
-                                maxLength: 18
-                                enum:
-                                  - Sales Taxable
-                                  - Sales Not Taxable
-                                example: Sales Taxable
                               salesman_number:
                                 type: string
                                 maxLength: 4
@@ -1035,7 +1018,7 @@ paths:
                                 type: string
                                 maxLength: 10
                                 example: 01/01/1991
-                              ship_via:
+                              ship_via_text:
                                 type: string
                                 maxLength: 20
                                 example: ' '
@@ -1051,19 +1034,6 @@ paths:
                                 type: string
                                 maxLength: 2
                                 example: CA
-                              tax_exempt_reason:
-                                title: TaxExemptReasonEnum
-                                x-tags:
-                                  - Enumeration
-                                type: string
-                                maxLength: 14
-                                enum:
-                                  - In Bond
-                                  - Export
-                                  - Unknown
-                                  - Export and Pay
-                                  - Not Exempt
-                                example: Not Exempt
                               zip_code:
                                 type: string
                                 maxLength: 10
@@ -1121,7 +1091,7 @@ paths:
                                       type: string
                                       maxLength: 8
                                       example: '12:00:00'
-                                    last_mod_user:
+                                    last_mod_user_name:
                                       type: string
                                       maxLength: 8
                                       example: JOE
@@ -1316,11 +1286,11 @@ paths:
                                       type: string
                                       maxLength: 2
                                       example: CA
-                                    zipcode:
+                                    zip_code:
                                       type: string
                                       maxLength: 10
                                       example: '95409'
-                                    phone:
+                                    phone_number:
                                       type: string
                                       maxLength: 16
                                       example: 707-539-7990
@@ -1328,10 +1298,6 @@ paths:
                                       type: string
                                       maxLength: 256
                                       example: orders@amssoftware.com;customerservice@amssoftware.com
-                                    ocd_distribution_list_code:
-                                      type: string
-                                      maxLength: 2
-                                      example: WB
         '401':
           description: The authorization GUID used in the request was invalid/expired or the authorization header itself was missing.
           content:
@@ -1517,7 +1483,7 @@ paths:
                                   type: string
                                   maxLength: 8
                                   example: '12:00:00'
-                                last_mod_user:
+                                last_mod_user_name:
                                   type: string
                                   maxLength: 8
                                   example: JOE
@@ -1844,11 +1810,11 @@ paths:
                                   type: string
                                   maxLength: 2
                                   example: CA
-                                zipcode:
+                                zip_code:
                                   type: string
                                   maxLength: 10
                                   example: '95409'
-                                phone:
+                                phone_number:
                                   type: string
                                   maxLength: 16
                                   example: 707-539-7990
@@ -1856,10 +1822,6 @@ paths:
                                   type: string
                                   maxLength: 256
                                   example: orders@amssoftware.com;customerservice@amssoftware.com
-                                ocd_distribution_list_code:
-                                  type: string
-                                  maxLength: 2
-                                  example: WB
         '401':
           description: The authorization GUID used in the request was invalid/expired or the authorization header itself was missing.
           content:
@@ -1978,6 +1940,27 @@ components:
       required: false
       schema:
         type: string
+    CustNameQueryParm:
+      name: cust_name
+      in: query
+      description: Query parameter that will filter results by the ship_customer name. The comparison type will be using the 'contains' strategy.
+      required: false
+      schema:
+        type: string
+    ActiveStatusQueryParm:
+      name: active_status
+      in: query
+      description: 'Query parameter that will filter results by the active_status of the ship_customer. Comparison type will be exact matching. Values are ''ACTIVE'' for Active Customer, ''HIGH'' for High Activity Customer, and ''INACTIVE'' for Inactive Customer.'
+      required: false
+      schema:
+        type: string
+    BillCustNameQueryParm:
+      name: bill_cust_name
+      in: query
+      description: Query parameter that will filter results by the name of the bill-to customer attached to the ship_customer. The comparison will be done using the 'contains' strategy.
+      required: false
+      schema:
+        type: string
     CustomerIDPathParm:
       in: path
       name: customer_id
@@ -2041,7 +2024,7 @@ components:
                                   type: string
                                   maxLength: 2
                                   example: NA
-                                ars_statement_code:
+                                ars_ar_statement_code:
                                   type: string
                                   maxLength: 2
                                   example: NA
@@ -2054,6 +2037,10 @@ components:
                                   minimum: 0
                                   maximum: 9999
                                   example: 0
+                                bill_to_customer_report_description:
+                                  type: string
+                                  maxLength: 30
+                                  example: Some great customer
                                 broker_number:
                                   type: string
                                   maxLength: 4
@@ -2075,6 +2062,14 @@ components:
                                   type: string
                                   maxLength: 30
                                   example: Some great customer
+                                cou_fips_county_code:
+                                  type: string
+                                  maxLength: 3
+                                  example: 097
+                                cst_cust_status_code:
+                                  type: string
+                                  maxLength: 4
+                                  example: COD
                                 ctr_country_code:
                                   type: string
                                   maxLength: 4
@@ -2092,7 +2087,7 @@ components:
                                   type: string
                                   maxLength: 30
                                   example: Some great customer
-                                dac_da_class_code:
+                                dac_depletion_allowance_class_code:
                                   type: string
                                   maxLength: 4
                                   example: ' '
@@ -2108,17 +2103,6 @@ components:
                                   type: string
                                   maxLength: 30
                                   example: Haha! Thank you!
-                                delivery_status:
-                                  title: DeliveryStatusEnum
-                                  x-tags:
-                                    - Enumeration
-                                  type: string
-                                  maxLength: 24
-                                  enum:
-                                    - Check On Delivery
-                                    - Check Before Delivery
-                                    - On Hold
-                                  example: Check On Delivery
                                 deplete_to_customer_id:
                                   type: integer
                                   minimum: 0
@@ -2136,14 +2120,14 @@ components:
                                   type: string
                                   maxLength: 2
                                   example: '10'
+                                ete_tax_exempt_code:
+                                  type: string
+                                  maxLength: 2
+                                  example: 'NO'
                                 fgh_freight_code:
                                   type: string
                                   maxLength: 2
                                   example: NA
-                                fips_county_code:
-                                  type: string
-                                  maxLength: 3
-                                  example: 097
                                 ftt_invoice_type_code:
                                   type: string
                                   maxLength: 2
@@ -2225,16 +2209,6 @@ components:
                                   type: string
                                   maxLength: 4
                                   example: NA
-                                sales_tax_status:
-                                  title: SalesTaxStatusEnum
-                                  x-tags:
-                                    - Enumeration
-                                  type: string
-                                  maxLength: 18
-                                  enum:
-                                    - Sales Taxable
-                                    - Sales Not Taxable
-                                  example: Sales Taxable
                                 salesman_number:
                                   type: string
                                   maxLength: 4
@@ -2255,7 +2229,7 @@ components:
                                   type: string
                                   maxLength: 10
                                   example: 01/01/1991
-                                ship_via:
+                                ship_via_text:
                                   type: string
                                   maxLength: 20
                                   example: ' '
@@ -2271,19 +2245,6 @@ components:
                                   type: string
                                   maxLength: 2
                                   example: CA
-                                tax_exempt_reason:
-                                  title: TaxExemptReasonEnum
-                                  x-tags:
-                                    - Enumeration
-                                  type: string
-                                  maxLength: 14
-                                  enum:
-                                    - In Bond
-                                    - Export
-                                    - Unknown
-                                    - Export and Pay
-                                    - Not Exempt
-                                  example: Not Exempt
                                 zip_code:
                                   type: string
                                   maxLength: 10
@@ -2341,7 +2302,7 @@ components:
                                         type: string
                                         maxLength: 8
                                         example: '12:00:00'
-                                      last_mod_user:
+                                      last_mod_user_name:
                                         type: string
                                         maxLength: 8
                                         example: JOE
@@ -2536,11 +2497,11 @@ components:
                                         type: string
                                         maxLength: 2
                                         example: CA
-                                      zipcode:
+                                      zip_code:
                                         type: string
                                         maxLength: 10
                                         example: '95409'
-                                      phone:
+                                      phone_number:
                                         type: string
                                         maxLength: 16
                                         example: 707-539-7990
@@ -2548,10 +2509,6 @@ components:
                                         type: string
                                         maxLength: 256
                                         example: orders@amssoftware.com;customerservice@amssoftware.com
-                                      ocd_distribution_list_code:
-                                        type: string
-                                        maxLength: 2
-                                        example: WB
     200V1SuccessfulShipCustomerGet:
       description: Ok - The get of an warehouse ship_customer resource was successful
       content:
@@ -2599,7 +2556,7 @@ components:
                             type: string
                             maxLength: 2
                             example: NA
-                          ars_statement_code:
+                          ars_ar_statement_code:
                             type: string
                             maxLength: 2
                             example: NA
@@ -2612,6 +2569,10 @@ components:
                             minimum: 0
                             maximum: 9999
                             example: 0
+                          bill_to_customer_report_description:
+                            type: string
+                            maxLength: 30
+                            example: Some great customer
                           broker_number:
                             type: string
                             maxLength: 4
@@ -2633,6 +2594,14 @@ components:
                             type: string
                             maxLength: 30
                             example: Some great customer
+                          cou_fips_county_code:
+                            type: string
+                            maxLength: 3
+                            example: 097
+                          cst_cust_status_code:
+                            type: string
+                            maxLength: 4
+                            example: COD
                           ctr_country_code:
                             type: string
                             maxLength: 4
@@ -2650,7 +2619,7 @@ components:
                             type: string
                             maxLength: 30
                             example: Some great customer
-                          dac_da_class_code:
+                          dac_depletion_allowance_class_code:
                             type: string
                             maxLength: 4
                             example: ' '
@@ -2666,17 +2635,6 @@ components:
                             type: string
                             maxLength: 30
                             example: Haha! Thank you!
-                          delivery_status:
-                            title: DeliveryStatusEnum
-                            x-tags:
-                              - Enumeration
-                            type: string
-                            maxLength: 24
-                            enum:
-                              - Check On Delivery
-                              - Check Before Delivery
-                              - On Hold
-                            example: Check On Delivery
                           deplete_to_customer_id:
                             type: integer
                             minimum: 0
@@ -2694,14 +2652,14 @@ components:
                             type: string
                             maxLength: 2
                             example: '10'
+                          ete_tax_exempt_code:
+                            type: string
+                            maxLength: 2
+                            example: 'NO'
                           fgh_freight_code:
                             type: string
                             maxLength: 2
                             example: NA
-                          fips_county_code:
-                            type: string
-                            maxLength: 3
-                            example: 097
                           ftt_invoice_type_code:
                             type: string
                             maxLength: 2
@@ -2783,16 +2741,6 @@ components:
                             type: string
                             maxLength: 4
                             example: NA
-                          sales_tax_status:
-                            title: SalesTaxStatusEnum
-                            x-tags:
-                              - Enumeration
-                            type: string
-                            maxLength: 18
-                            enum:
-                              - Sales Taxable
-                              - Sales Not Taxable
-                            example: Sales Taxable
                           salesman_number:
                             type: string
                             maxLength: 4
@@ -2813,7 +2761,7 @@ components:
                             type: string
                             maxLength: 10
                             example: 01/01/1991
-                          ship_via:
+                          ship_via_text:
                             type: string
                             maxLength: 20
                             example: ' '
@@ -2829,19 +2777,6 @@ components:
                             type: string
                             maxLength: 2
                             example: CA
-                          tax_exempt_reason:
-                            title: TaxExemptReasonEnum
-                            x-tags:
-                              - Enumeration
-                            type: string
-                            maxLength: 14
-                            enum:
-                              - In Bond
-                              - Export
-                              - Unknown
-                              - Export and Pay
-                              - Not Exempt
-                            example: Not Exempt
                           zip_code:
                             type: string
                             maxLength: 10
@@ -2899,7 +2834,7 @@ components:
                                   type: string
                                   maxLength: 8
                                   example: '12:00:00'
-                                last_mod_user:
+                                last_mod_user_name:
                                   type: string
                                   maxLength: 8
                                   example: JOE
@@ -3094,11 +3029,11 @@ components:
                                   type: string
                                   maxLength: 2
                                   example: CA
-                                zipcode:
+                                zip_code:
                                   type: string
                                   maxLength: 10
                                   example: '95409'
-                                phone:
+                                phone_number:
                                   type: string
                                   maxLength: 16
                                   example: 707-539-7990
@@ -3106,10 +3041,6 @@ components:
                                   type: string
                                   maxLength: 256
                                   example: orders@amssoftware.com;customerservice@amssoftware.com
-                                ocd_distribution_list_code:
-                                  type: string
-                                  maxLength: 2
-                                  example: WB
     200V1SuccessfulOrdersArrayGet:
       description: Ok - The get of the orders array for a ship_customer was successful.
       content:
@@ -3179,7 +3110,7 @@ components:
                               type: string
                               maxLength: 8
                               example: '12:00:00'
-                            last_mod_user:
+                            last_mod_user_name:
                               type: string
                               maxLength: 8
                               example: JOE
@@ -3390,11 +3321,11 @@ components:
                               type: string
                               maxLength: 2
                               example: CA
-                            zipcode:
+                            zip_code:
                               type: string
                               maxLength: 10
                               example: '95409'
-                            phone:
+                            phone_number:
                               type: string
                               maxLength: 16
                               example: 707-539-7990
@@ -3402,10 +3333,6 @@ components:
                               type: string
                               maxLength: 256
                               example: orders@amssoftware.com;customerservice@amssoftware.com
-                            ocd_distribution_list_code:
-                              type: string
-                              maxLength: 2
-                              example: WB
     400BadParmsGetResponse:
       description: The query parameters used in the query of the products endpoint were invalid.
       content:
