@@ -36,7 +36,7 @@ jobs:
         with:
           rdme: openapi V1_Ship_Customers_API.yaml --key=${{ secrets.README_WAREHOUSE_AUTH_KEY }} --id=${{ secrets.README_WAREHOUSE_V1_SHIP_CUSTOMER_ID }}
         
-      - name: Sync the warehouse webhooks API
+      - name: Sync the warehouse webhook API
         uses: readmeio/rdme@8.0.4
         with:
           rdme: openapi V1_Warehouse_Webhooks_API.yaml --key=${{ secrets.README_WAREHOUSE_AUTH_KEY }} --id=${{ secrets.README_WAREHOUSE_V1_WEBHOOKS_ID }}
