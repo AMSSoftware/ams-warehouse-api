@@ -1297,6 +1297,7 @@ paths:
                   example: true
                 winery_reference_number:
                   type: string
+                  minLength: 4
                   maxLength: 20
                   example: 12345-01
                 win_ship_with_winery_code:
@@ -5166,6 +5167,7 @@ components:
                 example: true
               winery_reference_number:
                 type: string
+                minLength: 4
                 maxLength: 20
                 example: 12345-01
               win_ship_with_winery_code:
@@ -9137,6 +9139,7 @@ components:
           example: true
         winery_reference_number:
           type: string
+          minLength: 4
           maxLength: 20
           example: 12345-01
         win_ship_with_winery_code:
