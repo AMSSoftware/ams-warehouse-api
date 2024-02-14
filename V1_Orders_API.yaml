@@ -741,7 +741,7 @@ paths:
                                             example: SAL
                                           lane:
                                             type: string
-                                            maxLength: 6
+                                            maxLength: 256
                                             example: ' '
                                           loc_default_shipping_location_code:
                                             type: string
@@ -2162,7 +2162,7 @@ paths:
                                       example: SAL
                                     lane:
                                       type: string
-                                      maxLength: 6
+                                      maxLength: 256
                                       example: ' '
                                     loc_default_shipping_location_code:
                                       type: string
@@ -3166,7 +3166,7 @@ paths:
                                       example: SAL
                                     lane:
                                       type: string
-                                      maxLength: 6
+                                      maxLength: 256
                                       example: ' '
                                     loc_default_shipping_location_code:
                                       type: string
@@ -4324,7 +4324,7 @@ paths:
                                   example: SAL
                                 lane:
                                   type: string
-                                  maxLength: 6
+                                  maxLength: 256
                                   example: ' '
                                 loc_default_shipping_location_code:
                                   type: string
@@ -6040,7 +6040,7 @@ components:
                                         example: SAL
                                       lane:
                                         type: string
-                                        maxLength: 6
+                                        maxLength: 256
                                         example: ' '
                                       loc_default_shipping_location_code:
                                         type: string
@@ -6892,7 +6892,7 @@ components:
                                   example: SAL
                                 lane:
                                   type: string
-                                  maxLength: 6
+                                  maxLength: 256
                                   example: ' '
                                 loc_default_shipping_location_code:
                                   type: string
@@ -7744,7 +7744,7 @@ components:
                                   example: SAL
                                 lane:
                                   type: string
-                                  maxLength: 6
+                                  maxLength: 256
                                   example: ' '
                                 loc_default_shipping_location_code:
                                   type: string
@@ -8322,7 +8322,7 @@ components:
                               example: SAL
                             lane:
                               type: string
-                              maxLength: 6
+                              maxLength: 256
                               example: ' '
                             loc_default_shipping_location_code:
                               type: string
@@ -8919,7 +8919,7 @@ components:
             example: SAL
           lane:
             type: string
-            maxLength: 6
+            maxLength: 256
             example: ' '
           loc_default_shipping_location_code:
             type: string
